@@ -12,6 +12,21 @@
 - **🔧 Z-Probe Ready** - Future-proofed for automatic bed leveling
 - **📏 Correct Dimensions** - 310x310x330mm build volume configured
 - **🔌 USB Support** - Full USB connectivity for easy updates
+- **📚 Comprehensive Documentation** - Complete setup guide with wiring diagrams and troubleshooting
+
+## 📖 Complete Setup Guide
+
+**For detailed wiring instructions, troubleshooting, and step-by-step setup, see the comprehensive guide:**
+
+**[JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md](JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md)**
+
+This guide includes:
+- **🔌 Complete wiring diagrams** with exact pin numbers and wire colors
+- **📍 Step-by-step instructions** for safe installation
+- **🚨 Troubleshooting guide** for common issues
+- **✅ Verification checklists** to ensure proper setup
+- **🎯 Quick reference tables** for easy lookup
+- **⚠️ Safety warnings** about what NOT to connect
 
 ## 🏗️ Hardware Compatibility
 
@@ -39,17 +54,34 @@
 
 ## 🔌 Wiring Diagram
 
-### Display Connection (TFTGLCD_PANEL_SPI)
-| JGAurora A5S Display | SKR Mini E3 V2.0 Pin | Function |
-|----------------------|----------------------|----------|
-| **MOSI (Data In)** | **PA7** | SPI1_MOSI |
-| **MISO (Data Out)** | **PA6** | SPI1_MISO |
-| **SCK (Clock)** | **PA5** | SPI1_SCK |
-| **CS (Chip Select)** | **PA4** | SPI1_CS |
-| **DC (Data/Command)** | **PA3** | UART2_TX |
-| **RST (Reset)** | **PA2** | UART2_RX |
-| **VCC** | **3.3V** | Power |
-| **GND** | **GND** | Ground |
+> **📖 For complete wiring details, pin-by-pin instructions, and troubleshooting, see [JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md](JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md)**
+
+### **📍 Essential Display Connections (TFTGLCD_PANEL_SPI)**
+
+**34-Pin Ribbon Connector - Required Pins:**
+| JGAurora A5S Pin | SKR Mini E3 V2.0 Pin | Function | Wire Color |
+|------------------|----------------------|----------|------------|
+| **Pin 1 (SCK)** | **PA5** | SPI Clock | **YELLOW** |
+| **Pin 2 (TCS)** | **PA4** | Display CS | **BLUE** |
+| **Pin 5 (MOSI)** | **PA7** | Data In | **ORANGE** |
+| **Pin 6 (MISO)** | **PA6** | Data Out | **RED** |
+| **Pin 8 (GND)** | **GND** | Ground | **BLACK** |
+| **Pin 10 (VCC)** | **3.3V** | Power | **RED** |
+| **Pin 30 (RST)** | **PA2** | Reset | **BROWN** |
+| **Pin 33 (RS)** | **PA3** | Data/Command | **PURPLE** |
+
+**Optional SD Card Connection:**
+| JGAurora A5S Pin | SKR Mini E3 V2.0 Pin | Function | Wire Color |
+|------------------|----------------------|----------|------------|
+| **Pin 3 (FCS)** | **PA15** | SD Card CS | **GRAY** |
+
+### **📍 What NOT to Connect:**
+- **10-pin connector** on top of LCD panel - **DO NOT TOUCH** (internal connection)
+- **Any unused pins** - Leave disconnected
+- **5V power** - Display needs 3.3V only
+
+### **📍 Touch Interface:**
+Touch functionality is **integrated** with the display SPI connection - no separate wiring needed!
 
 ### NeoPixel LED Strips
 | Connection | SKR Mini E3 V2.0 Pin | Function |
@@ -91,11 +123,13 @@ M420 S1    ; Enable leveling for prints
 │   ├── Configuration.h              # Main configuration (READY TO USE)
 │   ├── Configuration_adv.h          # Advanced configuration
 │   └── src/                         # Marlin source files
-├── JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md  # Complete setup guide
+├── 📖 JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md  # ⭐ COMPLETE SETUP GUIDE ⭐
 ├── platformio.ini                   # PlatformIO configuration
-├── README.md                        # This file
+├── README.md                        # This file (quick overview)
 └── LICENSE                          # Marlin license
 ```
+
+> **📚 Primary Documentation**: The [JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md](JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md) contains the complete setup guide with detailed wiring diagrams, troubleshooting, and step-by-step instructions.
 
 ## 🔧 Configuration Details
 
@@ -159,8 +193,21 @@ Found an issue or have an improvement? Please:
 - **Discussions**: [GitHub Discussions](https://github.com/yourusername/jgaurora-a5s-skr-mini-e3-v2-firmware/discussions)
 - **Wiki**: [Setup Guide](JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md)
 
+## 📚 Documentation
+
+**This README provides a quick overview. For complete setup instructions, see:**
+
+**[JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md](JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md)**
+
+The setup guide contains:
+- **🔌 Complete wiring diagrams** with exact pin numbers
+- **📍 Step-by-step installation** instructions
+- **🚨 Troubleshooting** for common issues
+- **✅ Verification checklists** for safe operation
+- **🎯 Quick reference** tables for experienced users
+
 ---
 
-**⭐ If this firmware helps you, please star the repository!**
+**⭐ If this firmware helps you, please star the repository or give a tip!**
 
 **Happy 3D Printing! 🎉**
