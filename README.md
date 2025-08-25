@@ -6,7 +6,7 @@
 
 - **🎯 Complete Configuration** - Ready to compile for JGAurora A5S + SKR Mini E3 V2.0
 - **🖥️ Touchscreen Support** - TFTGLCD_PANEL_SPI with integrated touch functionality
-- **💡 NeoPixel LED Support** - Addressable RGB LED strips on PA8 pin
+- **💡 NeoPixel LED Support** - Addressable RGB LED strips on PA8 pin *(temporarily disabled for compilation)*
 - **📱 SD Auto-Detection** - Built-in SD card detection (no jumper wires needed)
 - **🔌 Filament Sensor** - Filament runout detection enabled
 - **🔧 Z-Probe Ready** - Future-proofed for automatic bed leveling
@@ -122,6 +122,12 @@ M420 S1    ; Enable leveling for prints
 2. **Touch not responding** - Verify touch calibration
 3. **LEDs not working** - Check PA8 connection and power supply
 4. **Build errors** - Use online Marlin builder for best results
+
+### NeoPixel LED Setup
+**Note**: NeoPixel is temporarily disabled for compilation compatibility. To enable:
+1. **Install Adafruit NeoPixel library** in Arduino IDE: `Sketch > Include Library > Manage Libraries > Search "Adafruit NeoPixel"`
+2. **Re-enable in Configuration.h**: Uncomment `#define NEOPIXEL_LED`
+3. **Recompile** - should work without errors
 
 ### Getting Help
 - **Check wiring** - Most issues are connection-related

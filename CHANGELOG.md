@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **Complete JGAurora A5S configuration** for SKR Mini E3 V2.0
 - **TFTGLCD_PANEL_SPI display support** with integrated touch functionality
-- **NeoPixel LED support** on PA8 pin (30 LEDs, RGBW)
+- **NeoPixel LED support** on PA8 pin (30 LEDs, RGBW) *(temporarily disabled for compilation compatibility)*
 - **Filament runout sensor** enabled on PC15 (E0-STOP)
 - **SD auto-detection** built-in via PC4 (no jumper wires needed)
 - **Z-probe ready configuration** for future automatic bed leveling
@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Updated SPI definitions** for newer STM32 Arduino framework
 - **Optimized configuration** for touchscreen and LED functionality
 - **Resolved serial port conflicts** by using USB-only communication
+- **Temporarily disabled NeoPixel** to resolve compilation issues with Adafruit library
 
 ### Fixed
 - **STM32 framework compatibility** issues with pin naming
