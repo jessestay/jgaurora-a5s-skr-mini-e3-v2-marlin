@@ -48,15 +48,33 @@ Connect the 34-pin ribbon to these pins:
 
 ---
 
+## 💡 **Important Notes About This Setup**
+
+### **🎨 Wire Colors**
+The colors shown in this guide (YELLOW, BLUE, ORANGE, etc.) are just examples from my personal setup. **You can use any colors you prefer** - just make sure to note which color goes to which pin for your own reference.
+
+### **🔌 Connection Method**
+I used **individual jumper cables** for easy connection and removal. This approach:
+- ✅ **No soldering required** - just plug and play
+- ✅ **Easy to troubleshoot** - can disconnect individual wires
+- ✅ **Reusable** - can move wires around if needed
+- ✅ **Beginner-friendly** - no special tools needed
+
+**Alternative**: You could also use the ribbon cable, but that would require soldering connectors to the board, which is more permanent and requires soldering skills.
+
+---
+
 ## 📍 **Pin Location Guide**
 
 ### **🔌 EXP1 Connector (Right Side)**
 ```
-EXP1 Connector:
+EXP1 Connector (2 columns × 5 rows):
 ┌─────────┐
 │ 1  3  5 │
 │ 2  4  6 │
 │ 7  8    │
+│ 9  10   │
+│ 11 12   │
 └─────────┘
 
 Pin 1: PB5  (MISO - RED wire)
@@ -68,26 +86,64 @@ Pin 8: PB15 (SD CS - GRAY wire, optional)
 
 ### **🔌 TFT Connector (Top-Left)**
 ```
-TFT Connector (5 pins):
-┌─────────┐
-│ 1  3  5 │
-│ 2  4    │
-└─────────┘
+TFT Connector (1 row × 5 pins):
+┌─────────────────┐
+│ 1  2  3  4  5  │
+└─────────────────┘
 
 Pin 1: PA2  (Reset - BROWN wire)
 Pin 2: PA3  (Data/Command - PURPLE wire)
+Pin 3: GND  (Ground - BLACK wire)
 Pin 4: GND  (Ground - BLACK wire)
-Pin 5: 3.3V (Power - PURPLE wire)
+Pin 5: 5V   (5V Power - NOT USED)
+```
+
+**⚠️ IMPORTANT**: Pin 5 is 5V, but we need 3.3V for the display. Use the SWD connector instead.
+
+### **🔌 SWD Connector (Right Side)**
+```
+SWD Connector (1 row × 5 pins):
+┌─────────────────┐
+│ 1  2  3  4  5  │
+└─────────────────┘
+
+Pin 1: SWDIO
+Pin 2: SWCLK  
+Pin 3: GND
+Pin 4: 3.3V ← **Use this for display power**
+Pin 5: 5V
 ```
 
 ### **🔌 Power Connections**
-- **3.3V**: Available on TFT connector and power headers
-- **GND**: Available on TFT connector and power headers
+- **3.3V**: Use SWD connector Pin 4 (furthest right)
+- **GND**: Available on TFT connector (Pin 3 or 4) or SWD connector (Pin 3)
 - **5V**: Available on power headers (for NeoPixels)
 
 ---
 
 ## 🔌 **Complete Wiring Diagram**
+
+### **📱 34-Pin LCD Connector Layout**
+```
+34-Pin LCD Connector (2 rows × 17 pins each):
+┌─────────────────────────────────────────────────┐
+│ 1  3  5  7  9  11 13 15 17 19 21 23 25 27 29 31 33 │ ← Top Row
+│ 2  4  6  8  10 12 14 16 18 20 22 24 26 28 30 32 34 │ ← Bottom Row
+└─────────────────────────────────────────────────┘
+
+Key Pins We're Using:
+Pin 1  (Top): SCK (Clock) - YELLOW wire
+Pin 2  (Top): TCS (Display CS) - BLUE wire
+Pin 3  (Top): FCS (SD Card CS) - GRAY wire (optional)
+Pin 5  (Top): MOSI (Data In) - ORANGE wire
+Pin 6  (Top): MISO (Data Out) - RED wire
+Pin 8  (Bottom): GND (Ground) - BLACK wire
+Pin 10 (Bottom): VCC (Power) - PURPLE wire
+Pin 30 (Bottom): RST (Reset) - BROWN wire
+Pin 33 (Bottom): RS (Data/Command) - PURPLE wire
+
+All other pins: Leave disconnected
+```
 
 ### **📱 Display Connection (Required - 8 wires)**
 
@@ -99,8 +155,8 @@ Pin 5: 3.3V (Power - PURPLE wire)
 | **RED** | Pin 6 | PB5 | Data Out | EXP1-1 |
 | **BROWN** | Pin 30 | PA2 | Reset | TFT Connector |
 | **PURPLE** | Pin 33 | PA3 | Data/Command | TFT Connector |
-| **BLACK** | Pin 8 | GND | Ground | TFT Connector |
-| **PURPLE** | Pin 10 | 3.3V | Power | TFT Connector |
+| **BLACK** | Pin 8 | GND | Ground | TFT Connector (Pin 3 or 4) |
+| **PURPLE** | Pin 10 | 3.3V | Power | SWD Connector (Pin 4) |
 
 ### **💾 SD Card Connection (Optional - 1 wire)**
 
@@ -119,8 +175,8 @@ Pin 5: 3.3V (Power - PURPLE wire)
 - [ ] **Multimeter** (optional but recommended)
 
 ### **⚡ Step 2: Connect Power First**
-1. **Connect Pin 8 (BLACK)** → **GND** on SKR board
-2. **Connect Pin 10 (PURPLE)** → **3.3V** on SKR board
+1. **Connect Pin 8 (BLACK)** → **GND** on SKR board (TFT connector Pin 3 or 4)
+2. **Connect Pin 10 (PURPLE)** → **3.3V** on SKR board (SWD connector Pin 4)
 
 **✅ Test**: Board should power up normally
 
