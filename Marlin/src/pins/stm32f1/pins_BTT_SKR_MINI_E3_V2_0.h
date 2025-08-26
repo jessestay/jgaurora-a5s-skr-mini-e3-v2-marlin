@@ -131,7 +131,7 @@
 
 //
 // Touch Screen pins - NOT NEEDED for TFTGLCD_PANEL_SPI
-// TFTGLCD handles touch through main SPI connection (PA_5/6/7)
+// TFTGLCD handles touch through main SPI connection (Software SPI)
 // No separate touch pins required
 //
 
@@ -141,8 +141,8 @@
 //
 
 //
-// Custom Hardware SPI Configuration for TFTGLCD_PANEL_SPI
-// Uses available pins mapped to hardware SPI peripheral
+// Software SPI Configuration for TFTGLCD_PANEL_SPI
+// Uses available EXP1 connector pins since hardwired SPI pins are not accessible
 //
 #if ENABLED(TFTGLCD_PANEL_SPI)
   // Use Software SPI with available EXP1 connector pins

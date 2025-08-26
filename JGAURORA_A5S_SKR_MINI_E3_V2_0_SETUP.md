@@ -14,19 +14,20 @@
 
 ## 🔧 **Configuration Selection Guide**
 
-**Choose your configuration based on available pins:**
+**Software SPI Configuration (Required):**
 
-### **Option 1: Hardware SPI (Default - Recommended)**
-- **Use this if**: You can access the hardwired SPI pins (PA4, PA5, PA6, PA7)
-- **Advantages**: Better performance, standard configuration
-- **Pins needed**: PA4, PA5, PA6, PA7, PA2, PA3, 3.3V, GND
+Since the hardwired SPI pins (PA4, PA5, PA6, PA7) are not accessible on the TFT connector, we **MUST use Software SPI** with available EXP1 connector pins.
 
-### **Option 2: Software SPI (Alternative)**
-- **Use this if**: You cannot access hardwired SPI pins (e.g., they're soldered)
-- **Advantages**: Uses available pins, no need to access hardwired connections
-- **Pins needed**: PB9, PB8, PB5, PA15, PB15, PA2, PA3, 3.3V, GND
+**Software SPI Pins (Available):**
+- **PB9 (EXP1-6)**: SCK (Clock)
+- **PB8 (EXP1-7)**: MOSI (Data In)
+- **PB5 (EXP1-1)**: MISO (Data Out)
+- **PA15 (EXP1-2)**: CS (Chip Select)
+- **PB15 (EXP1-8)**: SD Card CS
 
-> **💡 Your Situation**: Since you mentioned PA5, PA4, PA7, and PA6 are soldered connections, **use Option 2: Software SPI**.
+**Required Pins**: PB9, PB8, PB5, PA15, PB15, PA2, PA3, 3.3V, GND
+
+> **💡 Why Software SPI?**: The hardwired SPI pins (PA4-PA7) are not accessible on the TFT connector, so Software SPI is the only option.
 
 ## 🔌 COMPLETE WIRING DIAGRAM
 
@@ -51,9 +52,9 @@
 - **PC4**: Built-in SD card detect (no wiring needed)
 - **PC15**: E0-STOP connector (filament sensor)
 
-### **📍 Alternative: Software SPI Configuration (When Hardwired Pins Unavailable)**
+### **📍 Software SPI Configuration (Required - Hardwired Pins Not Accessible)**
 
-If you cannot access the hardwired SPI pins (PA4, PA5, PA6, PA7), you can use **Software SPI** with these available pins:
+Since the hardwired SPI pins (PA4, PA5, PA6, PA7) are not accessible on the TFT connector, we **MUST use Software SPI** with these available pins:
 
 **Software SPI Pins (Available):**
 - **PB9 (EXP1-6)**: SCK (Clock) - Available on EXP1 connector
@@ -359,28 +360,11 @@ Pin 34 (CS)      → NC   (Not Connected)
 
 ### **📍 Quick Reference - Essential Pins Only:**
 
-> **⚠️ IMPORTANT: Choose ONE configuration based on your available pins:**
-> - **Hardware SPI (Default)**: Uses hardwired pins PA4, PA5, PA6, PA7
-> - **Software SPI (Alternative)**: Uses available pins PB9, PB8, PB5, PA15, PB15
+> **⚠️ IMPORTANT: Software SPI is REQUIRED on this board**
+> - **Hardwired SPI pins (PA4, PA5, PA6, PA7) are NOT accessible**
+> - **Software SPI uses available EXP1 connector pins**
 
-**Hardware SPI Configuration (Default - If you can access hardwired pins):**
-```
-Pin 1  (YELLOW)  → PA5  (SCK)
-Pin 2  (BLUE)    → PA4  (CS)  
-Pin 5  (ORANGE)  → PA7  (MOSI)
-Pin 6  (RED)     → PA6  (MISO)
-Pin 8  (BLACK)   → GND
-Pin 10 (RED)     → 3.3V
-Pin 30 (BROWN)   → PA2  (RST)
-Pin 33 (PURPLE)  → PA3  (RS)
-```
-
-**For SD Card (Optional - Hardware SPI):**
-```
-Pin 3  (GRAY)   → PB15 (SD CS)
-```
-
-**Software SPI Alternative (When Hardwired Pins Unavailable):**
+**Software SPI Configuration (Required):**
 ```
 Pin 1  (YELLOW)  → PB9  (SCK)   - EXP1-6
 Pin 2  (BLUE)    → PA15 (CS)    - EXP1-2  

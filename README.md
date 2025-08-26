@@ -85,15 +85,11 @@ Touch functionality is **integrated** with the display SPI connection - no separ
 
 ## 🔧 Configuration Details
 
-### **Hardware SPI (Default):**
-- Uses hardwired SPI pins (PA4, PA5, PA6, PA7)
-- Better performance and compatibility
-- Standard Marlin TFTGLCD configuration
-
-### **Software SPI (Alternative):**
-- Uses available pins (PB9, PB8, PB5, PA15, PB15)
-- For when hardwired pins are inaccessible
+### **Software SPI (Required):**
+- Uses available EXP1 connector pins (PB9, PB8, PB5, PA15, PB15)
+- Required because hardwired SPI pins (PA4-PA7) are not accessible
 - Same functionality, slightly lower performance
+- **This is the ONLY option available on this board**
 
 ### **NeoPixel LEDs:**
 - **Pin**: PA8 (NeoPixel LED driving pin)
