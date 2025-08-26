@@ -155,6 +155,9 @@
   #define TFTGLCD_MISO_PIN                  PB_5   // EXP1-1 (Data Out)
   #define TFTGLCD_CS_PIN                    PA_15  // EXP1-2 (Display Chip Select)
   
+  // Create alias for existing TFTGLCD code
+  #define TFTGLCD_CS                        TFTGLCD_CS_PIN
+  
   // SD Card CS pin (separate from display CS)
   #define TFTGLCD_SD_CS_PIN                 PB_15  // EXP1-8 (SD Card Chip Select)
   
