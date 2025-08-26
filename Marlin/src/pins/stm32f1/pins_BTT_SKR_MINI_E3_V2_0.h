@@ -50,8 +50,8 @@
  *            SKR Mini E3 V2.0
  *                 ------
  * (BEEPER)  PB5  | 1  2 | PA15 (BTN_ENC)
- * (BTN_EN1) PA9  | 3  4 | RESET
- * (BTN_EN2) PA10   5  6 | PB9  (LCD_D4)
+ * (BTN_EN1) PC_14| 3  4 | RESET  // MOVED from PA9 to free up USB pin
+ * (BTN_EN2) PC_15| 5  6 | PB9  (LCD_D4)  // MOVED from PA10 to free up USB pin
  * (LCD_RS)  PB8  | 7  8 | PB15 (LCD_EN)
  *            GND | 9 10 | 5V
  *                 ------
@@ -59,9 +59,9 @@
  */
 #define EXP1_01_PIN                         PB_5
 #define EXP1_02_PIN                         PA_15
-#define EXP1_03_PIN                         PA_9
+#define EXP1_03_PIN                         PC_14  // MOVED from PA9 to free up USB pin
 #define EXP1_04_PIN                         -1    // RESET
-#define EXP1_05_PIN                         PA_10
+#define EXP1_05_PIN                         PC_15  // MOVED from PA10 to free up USB pin
 #define EXP1_06_PIN                         PB_9
 #define EXP1_07_PIN                         PB_8
 #define EXP1_08_PIN                         PB_15
@@ -85,7 +85,9 @@
   #define CONTROLLER_FAN_PIN            FAN1_PIN
 #endif
 
-#if HAS_TMC_UART
+// TMC UART DISABLED to free up PC10/PC11 for USB functionality
+// Using A4988 drivers instead of TMC2209 to avoid pin conflicts
+#if 0 // HAS_TMC_UART - DISABLED
   /**
    * TMC220x stepper drivers
    * Hardware serial communication ports
@@ -118,14 +120,16 @@
 // Changing these will not change the pin they are on.
 
 // Hardware UART pins
-#define UART1_TX_PIN                        PA_9   // default usage LCD connector
-#define UART1_RX_PIN                        PA_10  // default usage LCD connector
+// UART1 pins freed up for USB functionality (button inputs moved to PC14/PC15)
+// #define UART1_TX_PIN                        PA_9   // default usage LCD connector
+// #define UART1_RX_PIN                        PA_10  // default usage LCD connector
 #define UART2_TX_PIN                        PA_2   // default usage TFT connector
 #define UART2_RX_PIN                        PA_3   // default usage TFT connector
 #define UART3_TX_PIN                        PB_10  // default usage Y_STEP_PIN
 #define UART3_RX_PIN                        PB_11  // default usage Y_ENABLE_PIN
-#define UART4_TX_PIN                        PC_10  // default usage TMC UART
-#define UART4_RX_PIN                        PC_11  // default usage TMC UART
+// UART4 pins freed up for USB functionality (TMC UART disabled)
+// #define UART4_TX_PIN                        PC_10  // default usage TMC UART
+// #define UART4_RX_PIN                        PC_11  // default usage TMC UART
 #define UART5_TX_PIN                        PC_12  // default usage POWER_LOSS_PIN
 #define UART5_RX_PIN                        PD_2   // default usage E0_ENABLE_PIN
 
