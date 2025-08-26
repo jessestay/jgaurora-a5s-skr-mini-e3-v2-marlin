@@ -138,4 +138,27 @@
 // No jumper wire needed - uses standard SD detect pin PC_4
 //
 
+//
+// Custom Software SPI Configuration for TFTGLCD_PANEL_SPI
+// Uses available pins instead of hardwired SPI pins
+//
+#if ENABLED(TFTGLCD_PANEL_SPI)
+  // Force Software SPI to use available pins
+  #define FORCE_SOFT_SPI
+  
+  // Custom SPI pin assignments using available pins
+  #define TFTGLCD_SCK_PIN                   PB_9   // EXP1-6 (Clock)
+  #define TFTGLCD_MOSI_PIN                  PB_8   // EXP1-7 (Data In)
+  #define TFTGLCD_MISO_PIN                  PB_5   // EXP1-1 (Data Out)
+  #define TFTGLCD_CS_PIN                    PA_15  // EXP1-2 (Chip Select)
+  
+  // Display control pins (already connected)
+  #define TFTGLCD_DC_PIN                    PA_3   // TFT TX2 (Data/Command)
+  #define TFTGLCD_RST_PIN                   PA_2   // TFT RX2 (Reset)
+  
+  // Power pins (already connected)
+  #define TFTGLCD_VCC_PIN                   -1     // 3.3V from SWD area
+  #define TFTGLCD_GND_PIN                   -1     // GND from SWD area
+#endif
+
 

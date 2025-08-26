@@ -35,6 +35,52 @@
 - **PC4**: Built-in SD card detect (no wiring needed)
 - **PC15**: E0-STOP connector (filament sensor)
 
+### **📍 Alternative: Software SPI Configuration (When Hardwired Pins Unavailable)**
+
+If you cannot access the hardwired SPI pins (PA4, PA5, PA6, PA7), you can use **Software SPI** with these available pins:
+
+**Software SPI Pins (Available):**
+- **PB9 (EXP1-6)**: SCK (Clock) - Available on EXP1 connector
+- **PB8 (EXP1-7)**: MOSI (Data In) - Available on EXP1 connector
+- **PB5 (EXP1-1)**: MISO (Data Out) - Available on EXP1 connector
+- **PA15 (EXP1-2)**: CS (Chip Select) - Available on EXP1 connector
+
+**Already Connected Pins:**
+- **PA2**: RST (Reset) - Connected to TFT RX2 ✅
+- **PA3**: RS/DC (Data/Command) - Connected to TFT TX2 ✅
+- **3.3V**: Power - Connected to SWD area ✅
+- **GND**: Ground - Connected to SWD area ✅
+
+**To Enable Software SPI:**
+1. **Use the custom pin configuration** already added to the firmware
+2. **Connect to EXP1 connector** using the pin assignments above
+3. **No additional firmware changes** needed - Software SPI is automatically enabled
+
+### **📍 Software SPI Wiring Table (Alternative Configuration):**
+
+**Display Connection (Software SPI - EXP1 Connector):**
+| JGAurora A5S Display | SKR Mini E3 V2.0 Pin | Function | Wire Color | Status |
+|----------------------|----------------------|----------|------------|---------|
+| **Pin 1 (SCK)** | **PB9 (EXP1-6)** | SPI Clock | **YELLOW** | ✅ Available |
+| **Pin 2 (TCS)** | **PA15 (EXP1-2)** | Display CS | **BLUE** | ✅ Available |
+| **Pin 5 (MOSI)** | **PB8 (EXP1-7)** | Data In | **ORANGE** | ✅ Available |
+| **Pin 6 (MISO)** | **PB5 (EXP1-1)** | Data Out | **RED** | ✅ Available |
+| **Pin 8 (GND)** | **GND** | Ground | **BLACK** | ✅ Connected |
+| **Pin 10 (VCC)** | **3.3V** | Power | **RED** | ✅ Connected |
+| **Pin 30 (RST)** | **PA2** | Reset | **BROWN** | ✅ Connected |
+| **Pin 33 (RS)** | **PA3** | Data/Command | **PURPLE** | ✅ Connected |
+
+**SD Card Connection (Optional - Software SPI):**
+| JGAurora A5S SD | SKR Mini E3 V2.0 Pin | Function | Wire Color | Status |
+|----------------|----------------------|----------|------------|---------|
+| **Pin 3 (FCS)** | **PA15** | SD Card CS | **GRAY** | 🔶 Shared with Display CS |
+
+> **✅ Software SPI Advantages:**
+> - **Uses available pins** - No need to access hardwired SPI pins
+> - **EXP1 connector accessible** - Easy to connect and disconnect
+> - **Same functionality** - Display and touch work identically
+> - **No performance loss** - Software SPI is fast enough for displays
+
 ### **📍 JGAurora A5S LCD Board Pinout:**
 
 **34-Pin Ribbon Connector (Main Connection):**
