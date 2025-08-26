@@ -1,44 +1,44 @@
-# 🚀 JGAurora A5S + SKR Mini E3 V2.0 Marlin Firmware
+# 🚀 JGAurora A5S + SKR Mini E3 V2.0 + Touchscreen Firmware
 
-**Ready-to-compile Marlin 2.1.2.5 firmware for JGAurora A5S printers with BigTreeTech SKR Mini E3 V2.0 motherboards.**
+Custom Marlin 2.1.2.5 firmware for JGAurora A5S 3D printer with BigTreeTech SKR Mini E3 V2.0 motherboard, featuring TFTGLCD touchscreen support, NeoPixel LEDs, filament runout sensor, and SD card auto-detection.
 
 ## ✨ Features
 
-- **🎯 Complete Configuration** - Ready to compile for JGAurora A5S + SKR Mini E3 V2.0
-- **🖥️ Touchscreen Support** - TFTGLCD_PANEL_SPI with integrated touch functionality
-- **💡 NeoPixel LED Support** - Addressable RGB LED strips on PA8 pin *(temporarily disabled for compilation)*
-- **📱 SD Auto-Detection** - Built-in SD card detection (no jumper wires needed)
-- **🔌 Filament Sensor** - Filament runout detection enabled
-- **🔧 Z-Probe Ready** - Future-proofed for automatic bed leveling
-- **📏 Correct Dimensions** - 310x310x330mm build volume configured
-- **🔌 USB Support** - Full USB connectivity for easy updates
-- **📚 Comprehensive Documentation** - Complete setup guide with wiring diagrams and troubleshooting
+- **🎯 Custom Configuration**: Optimized for JGAurora A5S (310x310x330mm build volume)
+- **🖥️ Touchscreen Support**: TFTGLCD_PANEL_SPI with integrated touch functionality
+- **💡 NeoPixel LEDs**: Addressable RGB LED strips (temporarily disabled for compilation)
+- **🔍 Filament Runout**: Automatic pause and filament change with M600
+- **💾 SD Card**: Auto-detection and full SD card functionality
+- **🔌 USB Serial**: Easy firmware updates and G-code control
+- **🔧 Z-Probe Ready**: Future-proofed for BLTouch or similar probes
 
-## 📖 Complete Setup Guide
+## 🗺️ **PIN LOCATION GUIDE - SKR Mini E3 V2.0**
 
-**For detailed wiring instructions, troubleshooting, and step-by-step setup, see the comprehensive guide:**
+### **📍 Quick Pin Finder:**
 
-**[JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md](JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md)**
+**TFT Connector (Top-Left):**
+- **PA3 (DC)**: Pin 2 - Data/Command ← **Display RS pin**
+- **PA2 (RST)**: Pin 1 - Reset
+- **PA4 (CS)**: Pin 3 - Chip Select
+- **PA5 (SCK)**: Pin 4 - Clock
+- **PA6 (MISO)**: Pin 5 - Data Out
+- **PA7 (MOSI)**: Pin 6 - Data In
 
-This guide includes:
-- **🔌 Complete wiring diagrams** with exact pin numbers and wire colors
-- **📍 Step-by-step instructions** for safe installation
-- **🚨 Troubleshooting guide** for common issues
-- **✅ Verification checklists** to ensure proper setup
-- **🎯 Quick reference tables** for easy lookup
-- **⚠️ Safety warnings** about what NOT to connect
+**EXP1 Connector (Top-Right):**
+- **PA15**: Pin 2 - Button Encoder (SD Card CS)
+- **PB5**: Pin 1 - Beeper
+- **PB8**: Pin 7 - LCD RS
+- **PB9**: Pin 6 - LCD D4
 
-## 🏗️ Hardware Compatibility
+**Power Headers (Right side):**
+- **3.3V**: Display power
+- **GND**: Ground connections
 
-- **Printer**: JGAurora A5S (or similar 310x310mm bed printers)
-- **Motherboard**: BigTreeTech SKR Mini E3 V2.0
-- **Display**: TFTGLCD_PANEL_SPI compatible touchscreens
-- **Drivers**: TMC2209 stepper drivers
-- **LEDs**: NeoPixel RGBW strips (WS2812B, WS2815, SK6812, etc.)
+**For complete pin mapping, see [JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md](JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md)**
 
-## 📥 Quick Start
+## 🚀 Quick Start
 
-### Option 1: Online Marlin Builder (Recommended)
+### Option 1: Online Marlin Builder (RECOMMENDED)
 1. **Go to**: [Marlin Firmware Builder](https://marlinfw.org/tools/autobuild/)
 2. **Upload**: `Marlin/Configuration.h` and `Marlin/Configuration_adv.h`
 3. **Select Board**: "BigTreeTech SKR Mini E3 V2.0"
@@ -59,21 +59,21 @@ This guide includes:
 ### **📍 Essential Display Connections (TFTGLCD_PANEL_SPI)**
 
 **34-Pin Ribbon Connector - Required Pins:**
-| JGAurora A5S Pin | SKR Mini E3 V2.0 Pin | Function | Wire Color |
-|------------------|----------------------|----------|------------|
-| **Pin 1 (SCK)** | **PA5** | SPI Clock | **YELLOW** |
-| **Pin 2 (TCS)** | **PA4** | Display CS | **BLUE** |
-| **Pin 5 (MOSI)** | **PA7** | Data In | **ORANGE** |
-| **Pin 6 (MISO)** | **PA6** | Data Out | **RED** |
-| **Pin 8 (GND)** | **GND** | Ground | **BLACK** |
-| **Pin 10 (VCC)** | **3.3V** | Power | **RED** |
-| **Pin 30 (RST)** | **PA2** | Reset | **BROWN** |
-| **Pin 33 (RS)** | **PA3** | Data/Command | **PURPLE** |
+| JGAurora A5S Pin | SKR Mini E3 V2.0 Pin | Function | Wire Color | Location |
+|------------------|----------------------|----------|------------|----------|
+| **Pin 1 (SCK)** | **PA5** | SPI Clock | **YELLOW** | TFT Connector Pin 4 |
+| **Pin 2 (TCS)** | **PA4** | Display CS | **BLUE** | TFT Connector Pin 3 |
+| **Pin 5 (MOSI)** | **PA7** | Data In | **ORANGE** | TFT Connector Pin 6 |
+| **Pin 6 (MISO)** | **PA6** | Data Out | **RED** | TFT Connector Pin 5 |
+| **Pin 8 (GND)** | **GND** | Ground | **BLACK** | Power Header |
+| **Pin 10 (VCC)** | **3.3V** | Power | **RED** | Power Header |
+| **Pin 30 (RST)** | **PA2** | Reset | **BROWN** | TFT Connector Pin 1 |
+| **Pin 33 (RS)** | **PA3** | Data/Command | **PURPLE** | TFT Connector Pin 2 |
 
 **Optional SD Card Connection:**
-| JGAurora A5S Pin | SKR Mini E3 V2.0 Pin | Function | Wire Color |
-|------------------|----------------------|----------|------------|
-| **Pin 3 (FCS)** | **PA15** | SD Card CS | **GRAY** |
+| JGAurora A5S Pin | SKR Mini E3 V2.0 Pin | Function | Wire Color | Location |
+|------------------|----------------------|----------|------------|----------|
+| **Pin 3 (FCS)** | **PA15** | SD Card CS | **GRAY** | EXP1 Connector Pin 2 |
 
 ### **📍 What NOT to Connect:**
 - **10-pin connector** on top of LCD panel - **DO NOT TOUCH** (internal connection)
@@ -83,131 +83,61 @@ This guide includes:
 ### **📍 Touch Interface:**
 Touch functionality is **integrated** with the display SPI connection - no separate wiring needed!
 
-### NeoPixel LED Strips
-| Connection | SKR Mini E3 V2.0 Pin | Function |
-|------------|----------------------|----------|
-| **LED Data** | **PA8** | NeoPixel data signal |
-| **LED VCC** | **5V** | Power (external PSU recommended for >10 LEDs) |
-| **LED GND** | **GND** | Ground |
-
-### Filament Runout Sensor
-| Connection | SKR Mini E3 V2.0 Pin | Function |
-|------------|----------------------|----------|
-| **Signal** | **PC15** | E0-STOP connector |
-| **VCC** | **5V** | Power |
-| **GND** | **GND** | Ground |
-
-## 🎮 G-code Control
-
-### LED Control
-```gcode
-M150 R255 G0 B0    ; Set LEDs to red
-M150 R0 G255 B0    ; Set LEDs to green  
-M150 R0 G0 B255    ; Set LEDs to blue
-M150 R255 G255 B255 ; Set LEDs to white
-M150 R0 G0 B0      ; Turn LEDs off
-```
-
-### Bed Leveling
-```gcode
-G28        ; Home all axes
-G29        ; Start manual bed leveling (follow prompts)
-M500       ; Save to EEPROM
-M420 S1    ; Enable leveling for prints
-```
-
-## 📁 Repository Structure
-
-```
-├── Marlin/                          # Main Marlin source code
-│   ├── Configuration.h              # Main configuration (READY TO USE)
-│   ├── Configuration_adv.h          # Advanced configuration
-│   └── src/                         # Marlin source files
-├── 📖 JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md  # ⭐ COMPLETE SETUP GUIDE ⭐
-├── platformio.ini                   # PlatformIO configuration
-├── README.md                        # This file (quick overview)
-└── LICENSE                          # Marlin license
-```
-
-> **📚 Primary Documentation**: The [JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md](JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md) contains the complete setup guide with detailed wiring diagrams, troubleshooting, and step-by-step instructions.
-
 ## 🔧 Configuration Details
 
-### Key Settings
-- **Motherboard**: `BOARD_BTT_SKR_MINI_E3_V2_0`
-- **Build Volume**: 310x310x330mm
-- **Display**: `TFTGLCD_PANEL_SPI`
-- **Touch**: Integrated (no separate `TOUCH_SCREEN`)
-- **LEDs**: `NEOPIXEL_LED` on PA8 (30 LEDs, RGBW)
-- **Filament Sensor**: `FILAMENT_RUNOUT_SENSOR` enabled
-- **SD Detection**: Built-in via PC4
+### **Hardware SPI (Default):**
+- Uses hardwired SPI pins (PA4, PA5, PA6, PA7)
+- Better performance and compatibility
+- Standard Marlin TFTGLCD configuration
 
-### Pin Assignments
-- **Display SPI**: PA4-PA7
-- **NeoPixel LED**: PA8
-- **Filament Sensor**: PC15
-- **SD Detect**: PC4
-- **Z-Probe Ready**: PC2 (shared with Z-min endstop)
+### **Software SPI (Alternative):**
+- Uses available pins (PB9, PB8, PB5, PA15, PB15)
+- For when hardwired pins are inaccessible
+- Same functionality, slightly lower performance
 
-## 🚨 Troubleshooting
+### **NeoPixel LEDs:**
+- **Pin**: PA8 (NeoPixel LED driving pin)
+- **Status**: Temporarily disabled for compilation
+- **Future**: Will be re-enabled once library issues are resolved
 
-### Common Issues
-1. **Display not working** - Check SPI connections and 3.3V power
-2. **Touch not responding** - Verify touch calibration
-3. **LEDs not working** - Check PA8 connection and power supply
-4. **Build errors** - Use online Marlin builder for best results
+### **Filament Runout Sensor:**
+- **Pin**: PC15 (E0-STOP)
+- **Feature**: Automatic pause with M600 command
+- **Configuration**: `FILAMENT_RUNOUT_SENSOR` enabled
 
-### NeoPixel LED Setup
-**Note**: NeoPixel is temporarily disabled for compilation compatibility. To enable:
-1. **Install Adafruit NeoPixel library** in Arduino IDE: `Sketch > Include Library > Manage Libraries > Search "Adafruit NeoPixel"`
-2. **Re-enable in Configuration.h**: Uncomment `#define NEOPIXEL_LED`
-3. **Recompile** - should work without errors
+### **SD Card:**
+- **Auto-detection**: PC4 (built-in, no jumper needed)
+- **SPI**: Hardware SPI2 on PB13/PB14/PB15
+- **CS**: Separate from display CS for independent operation
 
-### Getting Help
-- **Check wiring** - Most issues are connection-related
-- **Use online builder** - Gets around local build issues
-- **Community support** - Marlin forums and Discord
+## 🐛 Troubleshooting
 
-## 📄 License
+### **Common Issues:**
+1. **Display not powering on**: Check 3.3V power and ground connections
+2. **Touch not working**: Touch is integrated - no separate wiring needed
+3. **SD card not detected**: Verify PC4 connection and card formatting
+4. **USB not connecting**: Check USB_CONNECT_PIN configuration
 
-This project is based on [Marlin Firmware](https://github.com/MarlinFirmware/Marlin) and is licensed under the [GPL v3 License](LICENSE).
+### **Getting Help:**
+- **Documentation**: [JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md](JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md)
+- **Issues**: Check the troubleshooting section in the setup guide
+- **Support**: Create an issue in this repository
+
+## 📚 Resources
+
+- **Marlin Firmware**: [marlinfw.org](https://marlinfw.org/)
+- **BigTreeTech**: [biqu.equipment](https://biqu.equipment/)
+- **JGAurora**: [jg-aurora.com](https://jg-aurora.com/)
+- **STM32duino**: [github.com/stm32duino](https://github.com/stm32duino)
 
 ## 🤝 Contributing
 
-Found an issue or have an improvement? Please:
-1. **Fork the repository**
-2. **Create a feature branch**
-3. **Make your changes**
-4. **Submit a pull request**
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on contributing to this project.
 
-## 🙏 Acknowledgments
+## 📄 License
 
-- **Marlin Firmware Team** - For the excellent firmware base
-- **BigTreeTech** - For the SKR Mini E3 V2.0 motherboard
-- **JGAurora** - For the A5S printer design
-- **3D Printing Community** - For testing and feedback
-
-## 📞 Support
-
-- **Issues**: [GitHub Issues](https://github.com/yourusername/jgaurora-a5s-skr-mini-e3-v2-firmware/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/jgaurora-a5s-skr-mini-e3-v2-firmware/discussions)
-- **Wiki**: [Setup Guide](JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md)
-
-## 📚 Documentation
-
-**This README provides a quick overview. For complete setup instructions, see:**
-
-**[JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md](JGAURORA_A5S_SKR_MINI_E3_V2_0_SETUP.md)**
-
-The setup guide contains:
-- **🔌 Complete wiring diagrams** with exact pin numbers
-- **📍 Step-by-step installation** instructions
-- **🚨 Troubleshooting** for common issues
-- **✅ Verification checklists** for safe operation
-- **🎯 Quick reference** tables for experienced users
+This project is based on Marlin Firmware, licensed under the GPL v3. See the [LICENSE](LICENSE) file for details.
 
 ---
 
-**⭐ If this firmware helps you, please star the repository or give a tip!**
-
-**Happy 3D Printing! 🎉**
+**Built with ❤️ for the 3D printing community**

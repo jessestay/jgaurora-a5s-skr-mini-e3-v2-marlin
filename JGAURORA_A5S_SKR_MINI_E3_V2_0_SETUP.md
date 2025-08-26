@@ -192,14 +192,14 @@ Pin 34 (CS)      → NC   (Not Connected)
 
 #### **Step 3: Connect Display SPI Pins**
 1. **Pin 1 (SCK)** → **PA5** (YELLOW wire)
-2. **Pin 2 (TCS)** → **PA4** (BLUE wire)
-3. **Pin 5 (MOSI)** → **PA7** (ORANGE wire)
-4. **Pin 6 (MISO)** → **PA6** (RED wire)
+2. **Pin 2 (TCS)** → **PA15** (BLUE wire)
+3. **Pin 5 (MOSI)** → **PB8** (ORANGE wire)
+4. **Pin 6 (MISO)** → **PB5** (RED wire)
 5. **Pin 30 (RST)** → **PA2** (BROWN wire)
 6. **Pin 33 (RS)** → **PA3** (PURPLE wire)
 
 #### **Step 4: Optional SD Card Connection**
-1. **Pin 3 (FCS)** → **PA15** (GRAY wire) - only if you want SD functionality
+1. **Pin 3 (FCS)** → **PB15** (GRAY wire) - only if you want SD functionality
 
 #### **Step 5: Verify Connections**
 1. **Check all wire colors** match the pinout above
@@ -377,7 +377,7 @@ Pin 33 (PURPLE)  → PA3  (RS)
 
 **For SD Card (Optional - Hardware SPI):**
 ```
-Pin 3  (GRAY)   → PA15 (SD CS)
+Pin 3  (GRAY)   → PB15 (SD CS)
 ```
 
 **Software SPI Alternative (When Hardwired Pins Unavailable):**
@@ -388,7 +388,7 @@ Pin 3  (GRAY)    → PB15 (SD CS) - EXP1-8
 Pin 5  (ORANGE)  → PB8  (MOSI)  - EXP1-7
 Pin 6  (RED)     → PB5  (MISO)  - EXP1-1
 Pin 8  (BLACK)   → GND
-Pin 10 (RED)     → 3.3V
+Pin 10 (PURPLE)     → 3.3V
 Pin 30 (BROWN)   → PA2  (RST)
 Pin 33 (PURPLE)  → PA3  (RS)
 ```
@@ -541,3 +541,84 @@ If you encounter issues:
 **Build Method**: Online Marlin Builder (recommended)  
 **Hardware**: Fully compatible  
 **Features**: All JGAurora A5S features preserved + touchscreen support
+
+**Visual Guide:**
+```
+TFT Connector (5 pins):
+┌─────────┐
+│ RST PA3 │  ← PA3 is HERE (Pin 2)
+│ PA2 PA4 │
+│ GND PA5 │
+│ 5V  PA6 │
+│     PA7 │
+└─────────┘
+```
+
+### **📍 Pin Index (Quick Lookup):**
+
+**A-Pins (Port A):**
+- **PA0**: Temperature sensor (Hotend) - Bottom area
+- **PA1**: Servo connector - Right side
+- **PA2**: TFT Reset - TFT Connector Pin 1
+- **PA3**: TFT Data/Command - TFT Connector Pin 2 ← **YOUR TARGET**
+- **PA4**: TFT Chip Select - TFT Connector Pin 3
+- **PA5**: TFT Clock - TFT Connector Pin 4
+- **PA6**: TFT MISO - TFT Connector Pin 5
+- **PA7**: TFT MOSI - TFT Connector Pin 6
+- **PA8**: NeoPixel LED - Right side
+- **PA9**: Button 1 - EXP1 Connector Pin 3
+- **PA10**: Button 2 - EXP1 Connector Pin 4
+- **PA13**: SWD Debug - Right side (disabled)
+- **PA14**: USB Connect - Right side (disabled)
+- **PA15**: Button Encoder - EXP1 Connector Pin 2
+
+**B-Pins (Port B):**
+- **PB0**: Z Motor Step - Bottom area
+- **PB1**: Z Motor Enable - Bottom area
+- **PB2**: Y Motor Direction - Bottom area
+- **PB3**: E0 Motor Step - Bottom area
+- **PB4**: E0 Motor Direction - Bottom area
+- **PB5**: Beeper - EXP1 Connector Pin 1
+- **PB6**: I2C SCL (EEPROM) - Right side
+- **PB7**: I2C SDA (EEPROM) - Right side
+- **PB8**: LCD RS - EXP1 Connector Pin 7
+- **PB9**: LCD D4 - EXP1 Connector Pin 6
+- **PB10**: Y Motor Step - Bottom area
+- **PB11**: Y Motor Enable - Bottom area
+- **PB12**: X Motor Direction - Bottom area
+- **PB13**: X Motor Step - Bottom area
+- **PB14**: X Motor Enable - Bottom area
+- **PB15**: LCD EN - EXP1 Connector Pin 8
+
+**C-Pins (Port C):**
+- **PC0**: X Limit Switch - Bottom area
+- **PC1**: Y Limit Switch - Bottom area
+- **PC2**: Z Limit Switch - Bottom area
+- **PC3**: Bed Temperature - Bottom area
+- **PC4**: SD Card Detect - Right side
+- **PC5**: Z Motor Direction - Bottom area
+- **PC6**: Fan 0 - Right side
+- **PC7**: Fan 1 - Right side
+- **PC8**: Hotend Heater - Right side
+- **PC9**: Bed Heater - Right side
+- **PC10**: TMC UART - Right side
+- **PC11**: TMC UART - Right side
+- **PC12**: Power Loss Detection - Right side
+- **PC13**: Power Supply Control - Right side
+- **PC14**: Z Probe - Right side
+- **PC15**: Filament Runout - Right side
+
+**D-Pins (Port D):**
+- **PD2**: E0 Motor Enable - Bottom area
+
+**Power Pins:**
+- **3.3V**: Multiple locations - Right side power headers
+- **5V**: Multiple locations - Right side power headers
+- **24V**: Main power input - Right side
+- **GND**: Multiple locations - Throughout board
+
+**Special Pins:**
+- **USB_DM**: PA11 (hardwired)
+- **USB_DP**: PA12 (hardwired)
+- **RESET**: Reset button (top)
+- **BOOT0**: Boot button (top)
