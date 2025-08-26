@@ -16,7 +16,7 @@ Custom Marlin 2.1.2.5 firmware for JGAurora A5S 3D printer with BigTreeTech SKR 
 
 ### **📍 Quick Pin Finder:**
 
-**TFT Connector (Top-Left):**
+**TFT Connector (Top-Left, 8 pins):**
 - **PA3 (DC)**: Pin 2 - Data/Command ← **Display RS pin**
 - **PA2 (RST)**: Pin 1 - Reset
 - **PA4 (CS)**: Pin 3 - Chip Select

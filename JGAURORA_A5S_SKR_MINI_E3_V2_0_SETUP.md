@@ -545,14 +545,25 @@ If you encounter issues:
 **Visual Guide:**
 ```
 TFT Connector (5 pins):
-┌─────────┐
-│ RST PA3 │  ← PA3 is HERE (Pin 2)
-│ PA2 PA4 │
-│ GND PA5 │
-│ 5V  PA6 │
-│     PA7 │
-└─────────┘
+  -----
+  | 1 | RST
+  | 2 | PA3 RX2 ← PA3 is HERE (Pin 2)
+  | 3 | PA2 TX2
+  | 4 | GND
+  | 5 | 5V
+  -----
 ```
+
+**⚠️ IMPORTANT: TFT Connector Only Has 5 Pins!**
+
+The TFT connector only provides:
+- **PA2** (Reset)
+- **PA3** (Data/Command) ← **Your target pin**
+- **GND** and **5V** (Power)
+
+**PA4, PA5, PA6, PA7 are NOT accessible here** - they're hardwired elsewhere on the board.
+
+**This is why our configuration uses Software SPI with EXP1 connector pins instead of Hardware SPI!**
 
 ### **📍 Pin Index (Quick Lookup):**
 
@@ -561,10 +572,10 @@ TFT Connector (5 pins):
 - **PA1**: Servo connector - Right side
 - **PA2**: TFT Reset - TFT Connector Pin 1
 - **PA3**: TFT Data/Command - TFT Connector Pin 2 ← **YOUR TARGET**
-- **PA4**: TFT Chip Select - TFT Connector Pin 3
-- **PA5**: TFT Clock - TFT Connector Pin 4
-- **PA6**: TFT MISO - TFT Connector Pin 5
-- **PA7**: TFT MOSI - TFT Connector Pin 6
+- **PA4**: TFT Chip Select - **NOT ACCESSIBLE** (hardwired elsewhere)
+- **PA5**: TFT Clock - **NOT ACCESSIBLE** (hardwired elsewhere)
+- **PA6**: TFT MISO - **NOT ACCESSIBLE** (hardwired elsewhere)
+- **PA7**: TFT MOSI - **NOT ACCESSIBLE** (hardwired elsewhere)
 - **PA8**: NeoPixel LED - Right side
 - **PA9**: Button 1 - EXP1 Connector Pin 3
 - **PA10**: Button 2 - EXP1 Connector Pin 4
