@@ -150,7 +150,10 @@
   #define TFTGLCD_SCK_PIN                   PB_9   // EXP1-6 (Clock)
   #define TFTGLCD_MOSI_PIN                  PB_8   // EXP1-7 (Data In)
   #define TFTGLCD_MISO_PIN                  PB_5   // EXP1-1 (Data Out)
-  #define TFTGLCD_CS_PIN                    PA_15  // EXP1-2 (Chip Select)
+  #define TFTGLCD_CS_PIN                    PA_15  // EXP1-2 (Display Chip Select)
+  
+  // SD Card CS pin (separate from display CS)
+  #define TFTGLCD_SD_CS_PIN                 PB_15  // EXP1-8 (SD Card Chip Select)
   
   // Display control pins (already connected)
   #define TFTGLCD_DC_PIN                    PA_3   // TFT TX2 (Data/Command)

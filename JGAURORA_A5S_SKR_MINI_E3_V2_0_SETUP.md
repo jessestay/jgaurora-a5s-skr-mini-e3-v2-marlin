@@ -73,7 +73,7 @@ If you cannot access the hardwired SPI pins (PA4, PA5, PA6, PA7), you can use **
 **SD Card Connection (Optional - Software SPI):**
 | JGAurora A5S SD | SKR Mini E3 V2.0 Pin | Function | Wire Color | Status |
 |----------------|----------------------|----------|------------|---------|
-| **Pin 3 (FCS)** | **PA15** | SD Card CS | **GRAY** | 🔶 Shared with Display CS |
+| **Pin 3 (FCS)** | **PB15 (EXP1-8)** | SD Card CS | **GRAY** | ✅ Separate from Display CS |
 
 > **✅ Software SPI Advantages:**
 > - **Uses available pins** - No need to access hardwired SPI pins
@@ -346,7 +346,20 @@ Pin 33 (RED)     → PA3  (RS)
 
 **For SD Card (Optional):**
 ```
-Pin 3  (GREEN)   → PA15 (SD CS)
+Pin 3  (GRAY)   → PB15 (SD CS) - EXP1-8
+```
+
+**Software SPI Alternative (When Hardwired Pins Unavailable):**
+```
+Pin 1  (YELLOW)  → PB9  (SCK)   - EXP1-6
+Pin 2  (BLUE)    → PA15 (CS)    - EXP1-2  
+Pin 3  (GRAY)    → PB15 (SD CS) - EXP1-8
+Pin 5  (ORANGE)  → PB8  (MOSI)  - EXP1-7
+Pin 6  (RED)     → PB5  (MISO)  - EXP1-1
+Pin 8  (BLACK)   → GND
+Pin 10 (RED)     → 3.3V
+Pin 30 (BROWN)   → PA2  (RST)
+Pin 33 (PURPLE)  → PA3  (RS)
 ```
 
 **DO NOT TOUCH:**
