@@ -12,6 +12,22 @@
 ✅ **NeoPixel LED support** - Addressable RGB LED strips on PA8  
 ✅ **All JGAurora A5S features** - Preserved mechanics and functionality  
 
+## 🔧 **Configuration Selection Guide**
+
+**Choose your configuration based on available pins:**
+
+### **Option 1: Hardware SPI (Default - Recommended)**
+- **Use this if**: You can access the hardwired SPI pins (PA4, PA5, PA6, PA7)
+- **Advantages**: Better performance, standard configuration
+- **Pins needed**: PA4, PA5, PA6, PA7, PA2, PA3, 3.3V, GND
+
+### **Option 2: Software SPI (Alternative)**
+- **Use this if**: You cannot access hardwired SPI pins (e.g., they're soldered)
+- **Advantages**: Uses available pins, no need to access hardwired connections
+- **Pins needed**: PB9, PB8, PB5, PA15, PB15, PA2, PA3, 3.3V, GND
+
+> **💡 Your Situation**: Since you mentioned PA5, PA4, PA7, and PA6 are soldered connections, **use Option 2: Software SPI**.
+
 ## 🔌 COMPLETE WIRING DIAGRAM
 
 ### **📍 SKR Mini E3 V2.0 Pin Locations:**
@@ -93,7 +109,7 @@ Pin Layout (Looking at the connector):
 
 Pin 1  (SCK)     → PA5  (SPI1_SCK)     ← YELLOW wire
 Pin 2  (TCS)     → PA4  (Display CS)    ← BLUE wire  
-Pin 3  (FCS)     → PA15 (SD Card CS)    ← GREEN wire (OPTIONAL)
+Pin 3  (FCS)     → PA15 (SD Card CS)    ← GRAY wire (OPTIONAL)
 Pin 4  (TINT)    → NC   (Not Connected) ← RED wire
 Pin 5  (MOSI)    → PA7  (SPI1_MOSI)    ← ORANGE wire
 Pin 6  (MISO)    → PA6  (SPI1_MISO)    ← RED wire
@@ -108,7 +124,7 @@ Pin 14-29 (DB17-DB1) → NC (Not Connected)
 Pin 30 (RST)     → PA2  (Reset)         ← BROWN wire
 Pin 31 (RD)      → NC   (Not Connected)
 Pin 32 (WR)      → NC   (Not Connected)
-Pin 33 (RS)      → PA3  (Data/Command)  ← RED wire
+Pin 33 (RS)      → PA3  (Data/Command)  ← PURPLE wire
 Pin 34 (CS)      → NC   (Not Connected)
 ```
 
@@ -206,21 +222,32 @@ Pin 34 (CS)      → NC   (Not Connected)
 ### **📍 Touch Interface:**
 | JGAurora A5S Touch | SKR Mini E3 V2.0 Pin | Function |
 |-------------------|----------------------|----------|
-| **Touch integrated with display** | **PA5/PA6/PA7** | TFTGLCD_PANEL_SPI handles touch through main SPI |
+| **Touch integrated with display** | **SPI pins** | TFTGLCD_PANEL_SPI handles touch through main SPI |
 
 > **✅ Touch Functionality:**
 > - **No separate touch wiring needed** - Touch handled through display SPI connection
 > - **TFTGLCD_PANEL_SPI protocol** - Touch commands sent through main display interface
 > - **Z-Probe and SD detection pins available** - No pin conflicts with touch functionality
 > - **Simplified wiring** - Only display SPI connection required for full touch support
+> - **Works with both configurations**: Hardware SPI (PA5/PA6/PA7) or Software SPI (PB9/PB8/PB5)
 
 ### **📍 SD Card (Optional):**
+
+**Hardware SPI Configuration:**
 | JGAurora A5S SD | SKR Mini E3 V2.0 Pin | Function |
 |----------------|----------------------|----------|
 | **SD MOSI** | **PA7** | Shared with display |
 | **SD MISO** | **PA6** | Shared with display |
 | **SD SCK** | **PA5** | Shared with display |
 | **SD CS** | **PA15** | Available GPIO |
+
+**Software SPI Configuration:**
+| JGAurora A5S SD | SKR Mini E3 V2.0 Pin | Function |
+|----------------|----------------------|----------|
+| **SD MOSI** | **PB8** | Shared with display |
+| **SD MISO** | **PB5** | Shared with display |
+| **SD SCK** | **PB9** | Shared with display |
+| **SD CS** | **PB15** | Available GPIO |
 
 > **✅ SD Card Sharing:**
 > - **SPI bus shared** between display and SD card
@@ -332,7 +359,11 @@ Pin 34 (CS)      → NC   (Not Connected)
 
 ### **📍 Quick Reference - Essential Pins Only:**
 
-**For Display + Touch (Required):**
+> **⚠️ IMPORTANT: Choose ONE configuration based on your available pins:**
+> - **Hardware SPI (Default)**: Uses hardwired pins PA4, PA5, PA6, PA7
+> - **Software SPI (Alternative)**: Uses available pins PB9, PB8, PB5, PA15, PB15
+
+**Hardware SPI Configuration (Default - If you can access hardwired pins):**
 ```
 Pin 1  (YELLOW)  → PA5  (SCK)
 Pin 2  (BLUE)    → PA4  (CS)  
@@ -341,12 +372,12 @@ Pin 6  (RED)     → PA6  (MISO)
 Pin 8  (BLACK)   → GND
 Pin 10 (RED)     → 3.3V
 Pin 30 (BROWN)   → PA2  (RST)
-Pin 33 (RED)     → PA3  (RS)
+Pin 33 (PURPLE)  → PA3  (RS)
 ```
 
-**For SD Card (Optional):**
+**For SD Card (Optional - Hardware SPI):**
 ```
-Pin 3  (GRAY)   → PB15 (SD CS) - EXP1-8
+Pin 3  (GRAY)   → PA15 (SD CS)
 ```
 
 **Software SPI Alternative (When Hardwired Pins Unavailable):**
