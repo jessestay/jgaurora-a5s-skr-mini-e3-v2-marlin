@@ -80,7 +80,7 @@ If you cannot access the hardwired SPI pins (PA4, PA5, PA6, PA7), you can use **
 | **Pin 1 (SCK)** | **PB9 (EXP1-6)** | SPI Clock | **YELLOW** | ✅ Available |
 | **Pin 2 (TCS)** | **PA15 (EXP1-2)** | Display CS | **BLUE** | ✅ Available |
 | **Pin 5 (MOSI)** | **PB8 (EXP1-7)** | Data In | **ORANGE** | ✅ Available |
-| **Pin 6 (MISO)** | **PB5 (EXP1-1)** | Data Out | **RED** | ✅ Available |
+| **Pin 6 (MISO)** | **PB5 (EXP1-1)** | Data Out | **PURPLE** | ✅ Available |
 | **Pin 8 (GND)** | **GND** | Ground | **BLACK** | ✅ Connected |
 | **Pin 10 (VCC)** | **3.3V** | Power | **RED** | ✅ Connected |
 | **Pin 30 (RST)** | **PA2** | Reset | **BROWN** | ✅ Connected |
@@ -112,12 +112,12 @@ Pin 2  (TCS)     → PA4  (Display CS)    ← BLUE wire
 Pin 3  (FCS)     → PA15 (SD Card CS)    ← GRAY wire (OPTIONAL)
 Pin 4  (TINT)    → NC   (Not Connected) ← RED wire
 Pin 5  (MOSI)    → PA7  (SPI1_MOSI)    ← ORANGE wire
-Pin 6  (MISO)    → PA6  (SPI1_MISO)    ← RED wire
+Pin 6  (MISO)    → PA6  (SPI1_MISO)    ← PURPLE wire
 Pin 7  (NC)      → NC   (Not Connected)
 Pin 8  (GND)     → GND  (Ground)        ← BLACK wire
-Pin 9  (GND)     → GND  (Ground)        ← BLACK wire
+Pin 9  (GND)     → GND  (Ground)        ← BROWN wire
 Pin 10 (VCC)     → 3.3V (3.3V Power)   ← RED wire
-Pin 11 (VCC)     → 3.3V (3.3V Power)   ← RED wire
+Pin 11 (VCC)     → 3.3V (3.3V Power)   ← (Not Connected)
 Pin 12 (BLEN)    → NC   (Not Connected)
 Pin 13 (SDCS)    → NC   (Not Connected)
 Pin 14-29 (DB17-DB1) → NC (Not Connected)
