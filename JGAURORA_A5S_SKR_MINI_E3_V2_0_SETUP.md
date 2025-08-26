@@ -32,14 +32,14 @@
 
 ### **Step 2: Wire the Display (8 wires)**
 Connect the 34-pin ribbon to these pins:
-- **Pin 1** → PB9 (EXP1-6) - Clock
-- **Pin 2** → PA15 (EXP1-2) - Chip Select  
-- **Pin 5** → PB8 (EXP1-7) - Data In
-- **Pin 6** → PB5 (EXP1-1) - Data Out
-- **Pin 30** → PA2 (TFT connector) - Reset
-- **Pin 33** → PA3 (TFT connector) - Data/Command
-- **Pin 8** → GND - Ground
-- **Pin 10** → 3.3V - Power
+- **YELLOW (or LCD Pin 1)** → PB9 (EXP1-6) - Clock
+- **BLUE (or LCD Pin 2)** → PA15 (EXP1-2) - Chip Select  
+- **ORANGE (or LCD Pin 5)** → PB8 (EXP1-7) - Data In
+- **RED (or LCD Pin 6)** → PB5 (EXP1-1) - Data Out
+- **BROWN (or LCD Pin 30)** → PA2 (TFT connector) - Reset
+- **PURPLE (or LCD Pin 33)** → PA3 (TFT connector) - Data/Command
+- **BLACK (or LCD Pin 8)** → GND - Ground
+- **PURPLE (or LCD Pin 10)** → 3.3V - Power
 
 ### **Step 3: Flash & Test**
 - Copy firmware to USB drive or SD card
@@ -50,8 +50,8 @@ Connect the 34-pin ribbon to these pins:
 
 ## 💡 **Important Notes About This Setup**
 
-### **🎨 Wire Colors**
-The colors shown in this guide (YELLOW, BLUE, ORANGE, etc.) are just examples from my personal setup. **You can use any colors you prefer** - just make sure to note which color goes to which pin for your own reference.
+### **🎨 Wire Colors & Pin Numbers**
+The colors shown in this guide (YELLOW, BLUE, ORANGE, etc.) are examples from my personal setup, but **pin numbers are always provided as backup**. You can use any colors you prefer - just make sure to note which color goes to which pin for your own reference. **Pin numbers are the definitive reference method**.
 
 ### **🔌 Connection Method**
 I used **individual jumper cables** for easy connection and removal. This approach:
@@ -132,15 +132,15 @@ Pin 5: 5V
 └─────────────────────────────────────────────────┘
 
 Key Pins We're Using:
-Pin 1  (Top): SCK (Clock)
-Pin 2  (Top): TCS (Display CS)
-Pin 3  (Top): FCS (SD Card CS) - optional
-Pin 5  (Top): MOSI (Data In)
-Pin 6  (Top): MISO (Data Out)
-Pin 8  (Bottom): GND (Ground)
-Pin 10 (Bottom): VCC (Power)
-Pin 30 (Bottom): RST (Reset)
-Pin 33 (Bottom): RS (Data/Command)
+Pin 1  (Top): SCK (Clock) - YELLOW wire
+Pin 2  (Top): TCS (Display CS) - BLUE wire
+Pin 3  (Top): FCS (SD Card CS) - GRAY wire (optional)
+Pin 5  (Top): MOSI (Data In) - ORANGE wire
+Pin 6  (Top): MISO (Data Out) - RED wire
+Pin 8  (Bottom): GND (Ground) - BLACK wire
+Pin 10 (Bottom): VCC (Power) - PURPLE wire
+Pin 30 (Bottom): RST (Reset) - BROWN wire
+Pin 33 (Bottom): RS (Data/Command) - PURPLE wire
 
 All other pins: Leave disconnected
 ```
@@ -175,27 +175,27 @@ All other pins: Leave disconnected
 - [ ] **Multimeter** (optional but recommended)
 
 ### **⚡ Step 2: Connect Power First**
-1. **Connect Pin 8** → **GND** on SKR board (TFT connector Pin 3 or 4)
-2. **Connect Pin 10** → **3.3V** on SKR board (SWD connector Pin 4)
+1. **Connect Pin 8 (BLACK)** → **GND** on SKR board (TFT connector Pin 3 or 4)
+2. **Connect Pin 10 (PURPLE)** → **3.3V** on SKR board (SWD connector Pin 4)
 
 **✅ Test**: Board should power up normally
 
 ### **🔌 Step 3: Connect Display SPI Pins**
-1. **Pin 1** → **PB9 (EXP1-6)**
-2. **Pin 2** → **PA15 (EXP1-2)**
-3. **Pin 5** → **PB8 (EXP1-7)**
-4. **Pin 6** → **PB5 (EXP1-1)**
+1. **Pin 1 (YELLOW)** → **PB9 (EXP1-6)**
+2. **Pin 2 (BLUE)** → **PA15 (EXP1-2)**
+3. **Pin 5 (ORANGE)** → **PB8 (EXP1-7)**
+4. **Pin 6 (RED)** → **PB5 (EXP1-1)**
 
 **✅ Test**: Display should show power indicator
 
 ### **📱 Step 4: Connect Display Control Pins**
-1. **Pin 30** → **PA2 (TFT connector)**
-2. **Pin 33** → **PA3 (TFT connector)**
+1. **Pin 30 (BROWN)** → **PA2 (TFT connector)**
+2. **Pin 33 (PURPLE)** → **PA3 (TFT connector)**
 
 **✅ Test**: Display should show Marlin boot screen
 
 ### **💾 Step 5: Optional SD Card (Skip if not needed)**
-1. **Pin 3** → **PB15 (EXP1-8)**
+1. **Pin 3 (GRAY)** → **PB15 (EXP1-8)**
 
 ---
 
@@ -217,7 +217,7 @@ All other pins: Leave disconnected
 
 ### **Before Powering On:**
 - [ ] **All 8 required wires connected** (6 SPI + 2 power)
-- [ ] **Pin numbers match** the pinout guide exactly
+- [ ] **Wire colors match** the pinout guide exactly
 - [ ] **10-pin connector untouched** (top of LCD panel)
 - [ ] **Unused pins disconnected**
 - [ ] **3.3V power** (not 5V)
@@ -309,7 +309,7 @@ M150 R255 G0 B0
 ### **Display Not Working:**
 1. **Check power connections** - Verify 3.3V and GND
 2. **Verify all 6 SPI pins** - SCK, CS, MOSI, MISO, RST, RS
-3. **Check pin connections** - Ensure correct pin identification
+3. **Check wire colors** - Ensure correct pin identification
 4. **Verify pin numbers** - Count carefully from pin 1
 
 ### **Touch Not Responding:**
@@ -356,7 +356,7 @@ M150 R255 G0 B0
 
 **Most issues are wiring-related:**
 1. **Double-check all connections** - Use the verification checklist
-2. **Verify pin numbers** - Follow the pinout guide exactly
+2. **Verify wire colors** - Follow the color guide exactly
 3. **Check pin numbers** - Count carefully from pin 1
 4. **Use online builder** - Gets around local build issues
 
