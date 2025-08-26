@@ -1,448 +1,219 @@
-# 🚀 JGAurora A5S + SKR Mini E3 V2.0 + Touchscreen Setup Guide
+# 🚀 JGAurora A5S + SKR Mini E3 V2.0 Setup Guide
 
-## 📋 What This Configuration Provides
+> **🎯 Goal**: Upgrade your JGAurora A5S with a touchscreen and modern motherboard in under 30 minutes
 
-✅ **SKR Mini E3 V2.0 motherboard** - Full STM32F103RE compatibility  
-✅ **JGAurora A5S printer settings** - 310x310x330mm build volume  
-✅ **Touchscreen support** - TFTGLCD_PANEL_SPI with integrated touch  
-✅ **SD auto-detection** - Built-in via PC4 (no jumper wire needed)  
-✅ **Filament runout sensor** - Enabled on PC15 (E0-STOP)  
-✅ **USB connectivity** - Easy firmware updates  
-✅ **Z-probe ready** - Future-proofed with shared pin configuration  
-✅ **NeoPixel LED support** - Addressable RGB LED strips on PA8  
-✅ **All JGAurora A5S features** - Preserved mechanics and functionality  
+---
 
-## 🔧 **Configuration Selection Guide**
+## 📋 **What You'll Get**
 
-**Software SPI Configuration (Required):**
+✅ **Touchscreen Display** - Full color with touch controls  
+✅ **Modern Motherboard** - SKR Mini E3 V2.0 (STM32F103RE)  
+✅ **SD Card Support** - Auto-detect, no extra wiring  
+✅ **Filament Sensor** - Built-in runout detection  
+✅ **NeoPixel LEDs** - RGB lighting effects  
+✅ **USB Updates** - Easy firmware flashing  
+✅ **All Original Features** - Preserved mechanics  
 
-Since the hardwired SPI pins (PA4, PA5, PA6, PA7) are not accessible on the TFT connector, we **MUST use Software SPI** with available EXP1 connector pins.
+---
 
-**Software SPI Pins (Available):**
-- **PB9 (EXP1-6)**: SCK (Clock)
-- **PB8 (EXP1-7)**: MOSI (Data In)
-- **PB5 (EXP1-1)**: MISO (Data Out)
-- **PA15 (EXP1-2)**: CS (Chip Select)
-- **PB15 (EXP1-8)**: SD Card CS
+## 🚨 **IMPORTANT: Read This First**
 
-**Required Pins**: PB9, PB8, PB5, PA15, PB15, PA2, PA3, 3.3V, GND
+**⚠️ CRITICAL WARNING**: The TFT connector on this board only has **5 pins** (PA2, PA3, GND, 5V, 3.3V). The hardwired SPI pins (PA4, PA5, PA6, PA7) are **NOT accessible**.
 
-> **💡 Why Software SPI?**: The hardwired SPI pins (PA4-PA7) are not accessible on the TFT connector, so Software SPI is the only option.
+**✅ SOLUTION**: We use **Software SPI** with the EXP1 connector instead. This works perfectly and is actually easier to wire!
 
-## 🔌 COMPLETE WIRING DIAGRAM
+---
 
-### **📍 SKR Mini E3 V2.0 Pin Locations:**
+## 🔧 **Quick Start (3 Steps)**
 
-**TFT Connector (Top-Left Area):**
-- **PA2 (RST)**: Reset pin - near TFT connector
-- **PA3 (DC)**: Data/Command pin - near TFT connector
+### **Step 1: Get the Firmware**
+- **Option A**: Use the pre-built files in this folder
+- **Option B**: Build online at [Marlin Firmware Builder](https://marlinfw.org/tools/autobuild/)
 
-**Power Pins:**
+### **Step 2: Wire the Display (8 wires)**
+Connect the 34-pin ribbon to these pins:
+- **YELLOW** → PB9 (EXP1-6) - Clock
+- **BLUE** → PA15 (EXP1-2) - Chip Select  
+- **ORANGE** → PB8 (EXP1-7) - Data In
+- **RED** → PB5 (EXP1-1) - Data Out
+- **BROWN** → PA2 (TFT connector) - Reset
+- **PURPLE** → PA3 (TFT connector) - Data/Command
+- **BLACK** → GND - Ground
+- **PURPLE** → 3.3V - Power
+
+### **Step 3: Flash & Test**
+- Copy firmware to USB drive or SD card
+- Power on the board
+- Test display and touch
+
+---
+
+## 📍 **Pin Location Guide**
+
+### **🔌 EXP1 Connector (Right Side)**
+```
+EXP1 Connector:
+┌─────────┐
+│ 1  3  5 │
+│ 2  4  6 │
+│ 7  8    │
+└─────────┘
+
+Pin 1: PB5  (MISO - RED wire)
+Pin 2: PA15 (CS   - BLUE wire)  
+Pin 6: PB9  (SCK  - YELLOW wire)
+Pin 7: PB8  (MOSI - ORANGE wire)
+Pin 8: PB15 (SD CS - GRAY wire, optional)
+```
+
+### **🔌 TFT Connector (Top-Left)**
+```
+TFT Connector (5 pins):
+┌─────────┐
+│ 1  3  5 │
+│ 2  4    │
+└─────────┘
+
+Pin 1: PA2  (Reset - BROWN wire)
+Pin 2: PA3  (Data/Command - PURPLE wire)
+Pin 4: GND  (Ground - BLACK wire)
+Pin 5: 3.3V (Power - PURPLE wire)
+```
+
+### **🔌 Power Connections**
 - **3.3V**: Available on TFT connector and power headers
 - **GND**: Available on TFT connector and power headers
+- **5V**: Available on power headers (for NeoPixels)
 
-**Other Pins:**
-- **PA8**: NeoPixel LED data pin (labeled "Neopixel" header)
-- **PA15**: Available GPIO for SD card CS (optional)
-- **PC2**: Z-STOP connector (Z-min endstop)
-- **PC4**: Built-in SD card detect (no wiring needed)
-- **PC15**: E0-STOP connector (filament sensor)
+---
 
-### **📍 Software SPI Configuration (Required - Hardwired Pins Not Accessible)**
+## 🔌 **Complete Wiring Diagram**
 
-Since the hardwired SPI pins (PA4, PA5, PA6, PA7) are not accessible on the TFT connector, we **MUST use Software SPI** with these available pins:
+### **📱 Display Connection (Required - 8 wires)**
 
-**Software SPI Pins (Available):**
-- **PB9 (EXP1-6)**: SCK (Clock) - Available on EXP1 connector
-- **PB8 (EXP1-7)**: MOSI (Data In) - Available on EXP1 connector
-- **PB5 (EXP1-1)**: MISO (Data Out) - Available on EXP1 connector
-- **PA15 (EXP1-2)**: CS (Chip Select) - Available on EXP1 connector
+| Wire Color | JGAurora Pin | SKR Pin | Function | Location |
+|------------|--------------|---------|----------|----------|
+| **YELLOW** | Pin 1 | PB9 | Clock | EXP1-6 |
+| **BLUE** | Pin 2 | PA15 | Chip Select | EXP1-2 |
+| **ORANGE** | Pin 5 | PB8 | Data In | EXP1-7 |
+| **RED** | Pin 6 | PB5 | Data Out | EXP1-1 |
+| **BROWN** | Pin 30 | PA2 | Reset | TFT Connector |
+| **PURPLE** | Pin 33 | PA3 | Data/Command | TFT Connector |
+| **BLACK** | Pin 8 | GND | Ground | TFT Connector |
+| **PURPLE** | Pin 10 | 3.3V | Power | TFT Connector |
 
-**Already Connected Pins:**
-- **PA2**: RST (Reset) - Connected to TFT RX2 ✅
-- **PA3**: RS/DC (Data/Command) - Connected to TFT TX2 ✅
-- **3.3V**: Power - Connected to SWD area ✅
-- **GND**: Ground - Connected to SWD area ✅
+### **💾 SD Card Connection (Optional - 1 wire)**
 
-**To Enable Software SPI:**
-1. **Use the custom pin configuration** already added to the firmware
-2. **Connect to EXP1 connector** using the pin assignments above
-3. **No additional firmware changes** needed - Software SPI is automatically enabled
+| Wire Color | JGAurora Pin | SKR Pin | Function | Location |
+|------------|--------------|---------|----------|----------|
+| **GRAY** | Pin 3 | PB15 | SD Card CS | EXP1-8 |
 
-### **📍 Software SPI Wiring Table (Alternative Configuration):**
+---
 
-**Display Connection (Software SPI - EXP1 Connector):**
-| JGAurora A5S Display | SKR Mini E3 V2.0 Pin | Function | Wire Color | Status |
-|----------------------|----------------------|----------|------------|---------|
-| **Pin 1 (SCK)** | **PB9 (EXP1-6)** | SPI Clock | **YELLOW** | ✅ Available |
-| **Pin 2 (TCS)** | **PA15 (EXP1-2)** | Display CS | **BLUE** | ✅ Available |
-| **Pin 5 (MOSI)** | **PB8 (EXP1-7)** | Data In | **ORANGE** | ✅ Available |
-| **Pin 6 (MISO)** | **PB5 (EXP1-1)** | Data Out | **RED** | ✅ Available |
-| **Pin 8 (GND)** | **GND** | Ground | **BLACK** | ✅ Connected |
-| **Pin 10 (VCC)** | **3.3V** | Power | **PURPLE** | ✅ Connected |
-| **Pin 30 (RST)** | **PA2** | Reset | **BROWN** | ✅ Connected |
-| **Pin 33 (RS)** | **PA3** | Data/Command | **PURPLE** | ✅ Connected |
+## 📋 **Step-by-Step Wiring Instructions**
 
-**SD Card Connection (Optional - Software SPI):**
-| JGAurora A5S SD | SKR Mini E3 V2.0 Pin | Function | Wire Color | Status |
-|----------------|----------------------|----------|------------|---------|
-| **Pin 3 (FCS)** | **PB15 (EXP1-8)** | SD Card CS | **GRAY** | ✅ Separate from Display CS |
+### **🔧 Step 1: Prepare Your Workspace**
+- [ ] **Clean, well-lit area** with good ventilation
+- [ ] **Small screwdriver** for terminal blocks
+- [ ] **Wire strippers** if needed
+- [ ] **Multimeter** (optional but recommended)
 
-> **✅ Software SPI Advantages:**
-> - **Uses available pins** - No need to access hardwired SPI pins
-> - **EXP1 connector accessible** - Easy to connect and disconnect
-> - **Same functionality** - Display and touch work identically
-> - **No performance loss** - Software SPI is fast enough for displays
+### **⚡ Step 2: Connect Power First**
+1. **Connect Pin 8 (BLACK)** → **GND** on SKR board
+2. **Connect Pin 10 (PURPLE)** → **3.3V** on SKR board
 
-### **📍 JGAurora A5S LCD Board Pinout:**
+**✅ Test**: Board should power up normally
 
-**34-Pin Ribbon Connector (Main Connection):**
-```
-Pin Layout (Looking at the connector):
-┌─────────────────────────────────────────────────┐
-│ 1  3  5  7  9  11 13 15 17 19 21 23 25 27 29 31 33 │
-│ 2  4  6  8  10 12 14 16 18 20 22 24 26 28 30 32 34 │
-└─────────────────────────────────────────────────┘
+### **🔌 Step 3: Connect Display SPI Pins**
+1. **Pin 1 (YELLOW)** → **PB9 (EXP1-6)**
+2. **Pin 2 (BLUE)** → **PA15 (EXP1-2)**
+3. **Pin 5 (ORANGE)** → **PB8 (EXP1-7)**
+4. **Pin 6 (RED)** → **PB5 (EXP1-1)**
 
-Pin 1  (SCK)     → PB9  (EXP1-6)       ← YELLOW wire
-Pin 2  (TCS)     → PA15 (EXP1-2)       ← BLUE wire  
-Pin 3  (FCS)     → PB15 (SD Card CS)   ← GRAY wire (OPTIONAL)
-Pin 4  (TINT)    → NC   (Not Connected) 
-Pin 5  (MOSI)    → PB8  (EXP1-7)       ← ORANGE wire
-Pin 6  (MISO)    → PB5  (EXP1-1)       ← RED wire
-Pin 7  (NC)      → NC   (Not Connected)
-Pin 8  (GND)     → GND  (Ground)        ← BLACK wire
-Pin 9  (GND)     → GND  (Ground)        ← BROWN wire
-Pin 10 (VCC)     → 3.3V (3.3V Power)   ← PURPLE wire
-Pin 11 (VCC)     → 3.3V (3.3V Power)   ← (Not Connected)
-Pin 12 (BLEN)    → NC   (Not Connected)
-Pin 13 (SDCS)    → NC   (Not Connected)
-Pin 14-29 (DB17-DB1) → NC (Not Connected)
-Pin 30 (RST)     → PA2  (Reset)         ← BROWN wire
-Pin 31 (RD)      → NC   (Not Connected)
-Pin 32 (WR)      → NC   (Not Connected)
-Pin 33 (RS)      → PA3  (Data/Command)  ← PURPLE wire
-Pin 34 (CS)      → NC   (Not Connected)
-```
+**✅ Test**: Display should show power indicator
 
-**10-Pin Connector (Top of LCD Panel):**
-- **DO NOT TOUCH** - This connects to the LCD screen internally
-- **Already connected** - No wiring needed
-- **Leave alone** - Modifying this will damage the display
+### **📱 Step 4: Connect Display Control Pins**
+1. **Pin 30 (BROWN)** → **PA2 (TFT connector)**
+2. **Pin 33 (PURPLE)** → **PA3 (TFT connector)**
 
-### **📍 Complete Wiring Guide:**
+**✅ Test**: Display should show Marlin boot screen
 
-#### **Required Connections (Display + Power):**
-| JGAurora A5S Pin | SKR Mini E3 V2.0 Pin | Function | Wire Color | Status |
-|------------------|----------------------|----------|------------|---------|
-| **Pin 1 (SCK)** | **PB9 (EXP1-6)** | SPI Clock | **YELLOW** | ✅ Required |
-| **Pin 2 (TCS)** | **PA15 (EXP1-2)** | Display CS | **BLUE** | ✅ Required |
-| **Pin 5 (MOSI)** | **PB8 (EXP1-7)** | Data In | **ORANGE** | ✅ Required |
-| **Pin 6 (MISO)** | **PB5 (EXP1-1)** | Data Out | **RED** | ✅ Required |
-| **Pin 8 (GND)** | **GND** | Ground | **BLACK** | ✅ Required |
-| **Pin 10 (VCC)** | **3.3V** | Power | **PURPLE** | ✅ Required |
-| **Pin 30 (RST)** | **PA2** | Reset | **BROWN** | ✅ Required |
-| **Pin 33 (RS)** | **PA3** | Data/Command | **PURPLE** | ✅ Required |
+### **💾 Step 5: Optional SD Card (Skip if not needed)**
+1. **Pin 3 (GRAY)** → **PB15 (EXP1-8)**
 
-#### **Optional Connections:**
-| JGAurora A5S Pin | SKR Mini E3 V2.0 Pin | Function | Wire Color | Status |
-|------------------|----------------------|----------|------------|---------|
-| **Pin 3 (FCS)** | **PA15** | SD Card CS | **GRAY** | 🔶 Optional |
+---
 
-#### **Unused Pins (Leave Disconnected):**
-- **Pin 4 (TINT)**: Touch interrupt - not needed for TFTGLCD_PANEL_SPI
-- **Pin 7 (NC)**: Not connected
-- **Pin 9 (GND)**: Second ground - not needed (use Pin 8)
-- **Pin 11 (VCC)**: Second VCC - not needed (use Pin 10)
-- **Pin 12 (BLEN)**: Backlight enable - not needed
-- **Pin 13 (SDCS)**: Secondary SD CS - not needed
-- **Pin 14-29 (DB17-DB1)**: Data bus pins - not needed for SPI mode
-- **Pin 31 (RD)**: Read signal - not needed for SPI mode
-- **Pin 32 (WR)**: Write signal - not needed for SPI mode
-- **Pin 34 (CS)**: Secondary CS - not needed
+## 🚨 **What NOT to Connect**
 
-### **📍 Wire Color Guide:**
-
-**Essential Colors (Required):**
-- **YELLOW**: SCK (Clock) - Pin 1
-- **BLUE**: Display CS - Pin 2  
-- **ORANGE**: MOSI (Data In) - Pin 5
-- **RED**: MISO (Data Out) - Pin 6
-- **BLACK**: Ground - Pin 8
-- **PURPLE**: 3.3V Power - Pin 10
-- **BROWN**: Reset - Pin 30
-- **PURPLE**: Data/Command - Pin 33
-
-**Optional Colors:**
-- **GRAY**: SD Card CS - Pin 3 (only if you need SD functionality)
-
-### **📍 Step-by-Step Wiring Instructions:**
-
-#### **Step 1: Prepare the 34-Pin Ribbon**
-1. **Identify the ribbon end** that connects to the SKR Mini E3 V2.0
-2. **Count the pins** - ensure you're working with the correct end
-3. **Check wire colors** - verify you have all required colors
-
-#### **Step 2: Connect Power First**
-1. **Pin 8 (GND)** → **GND** on SKR Mini E3 V2.0 (BLACK wire)
-2. **Pin 10 (VCC)** → **3.3V** on SKR Mini E3 V2.0 (PURPLE wire)
-
-#### **Step 3: Connect Display SPI Pins**
-1. **Pin 1 (SCK)** → **PB9 (EXP1-6)** (YELLOW wire)
-2. **Pin 2 (TCS)** → **PA15 (EXP1-2)** (BLUE wire)
-3. **Pin 5 (MOSI)** → **PB8 (EXP1-7)** (ORANGE wire)
-4. **Pin 6 (MISO)** → **PB5 (EXP1-1)** (RED wire)
-5. **Pin 30 (RST)** → **PA2** (BROWN wire)
-6. **Pin 33 (RS)** → **PA3** (PURPLE wire)
-
-#### **Step 4: Optional SD Card Connection**
-1. **Pin 3 (FCS)** → **PB15** (GRAY wire) - only if you want SD functionality
-
-#### **Step 5: Verify Connections**
-1. **Check all wire colors** match the pinout above
-2. **Ensure no loose connections**
-3. **Verify power connections** (3.3V and GND)
-4. **Double-check pin numbers** on both boards
-
-### **📍 What NOT to Connect:**
-
-#### **10-Pin Connector (Top of LCD Panel):**
-- **DO NOT TOUCH** - This is for internal LCD connection
+### **❌ 10-Pin Connector (Top of LCD Panel)**
+- **DO NOT TOUCH** - This is internal LCD connection
 - **Already wired** - No external connections needed
 - **Modifying this** will damage the display
 
-#### **Unused Pins:**
+### **❌ Unused Pins**
 - **Leave all unused pins disconnected**
 - **Don't connect to 5V** - Display needs 3.3V only
-- **Don't connect to random pins** - Only use the specified connections
+- **Don't connect to random pins** - Only use specified connections
 
-### **📍 Touch Interface:**
-| JGAurora A5S Touch | SKR Mini E3 V2.0 Pin | Function |
-|-------------------|----------------------|----------|
-| **Touch integrated with display** | **SPI pins** | TFTGLCD_PANEL_SPI handles touch through main SPI |
+---
 
-> **✅ Touch Functionality:**
-> - **No separate touch wiring needed** - Touch handled through display SPI connection
-> - **TFTGLCD_PANEL_SPI protocol** - Touch commands sent through main display interface
-> - **Z-Probe and SD detection pins available** - No pin conflicts with touch functionality
-> - **Simplified wiring** - Only display SPI connection required for full touch support
-> - **Works with Software SPI configuration**: Uses EXP1 connector pins (PB9/PB8/PB5)
+## 🔍 **Wiring Verification Checklist**
 
-### **📍 SD Card (Optional):**
-
-**Software SPI Configuration:**
-| JGAurora A5S SD | SKR Mini E3 V2.0 Pin | Function |
-|----------------|----------------------|----------|
-| **SD MOSI** | **PB8** | Shared with display |
-| **SD MISO** | **PB5** | Shared with display |
-| **SD SCK** | **PB9** | Shared with display |
-| **SD CS** | **PB15** | Available GPIO |
-
-> **✅ SD Card Sharing:**
-> - **SPI bus shared** between display and SD card
-> - **Separate CS pins** - Display uses PA15 (EXP1-2), SD uses PB15 (EXP1-8)
-> - **No conflicts** - Firmware switches between devices
-> - **Efficient design** - Saves pins while maintaining functionality
-
-### **📍 Filament Runout Sensor:**
-| JGAurora A5S Sensor | SKR Mini E3 V2.0 Pin | Function |
-|---------------------|----------------------|----------|
-| **Filament Sensor Signal** | **PC15** | E0-STOP connector |
-| **Filament Sensor VCC** | **5V** | Power |
-| **Filament Sensor GND** | **GND** | Ground |
-
-### **📍 SD Auto-Detection (Built-in - ENABLED):**
-| Connection | SKR Mini E3 V2.0 Pin | Function |
-|------------|----------------------|----------|
-| **SD Detect Switch** | **PC4** | Built-in SD detection |
-
-> **✅ SD Auto-Detection:**
-> - **No jumper wire needed** - Uses standard SD_DETECT_PIN (PC4)
-> - **Automatic functionality** - Card insertion/removal detected automatically
-> - **Firmware enabled** - SD auto-detection works out of the box
-> - **SERVO pin available** - PA1 (SERVO) preserved for future servo use
->
-> **How it works:**
-> - **PC4 monitors** the SD card slot's built-in detect switch
-> - **Automatic mounting** when card is inserted
-> - **Safe unmounting** when card is removed
-> - **No additional wiring** required
-
-### **📍 NeoPixel LED Strips (ENABLED):**
-| Connection | SKR Mini E3 V2.0 Pin | Function |
-|------------|----------------------|----------|
-| **LED Data** | **PA8** | NeoPixel data signal |
-| **LED VCC** | **5V** | Power (external PSU recommended for >10 LEDs) |
-| **LED GND** | **GND** | Ground |
-
-> **✅ NeoPixel LED Features:**
-> - **Addressable RGB LEDs** - Individual control of each LED
-> - **RGBW Support** - Red, Green, Blue, and White channels
-> - **Up to 30 LEDs** - Default configuration (adjustable)
-> - **Sequential temperature display** - LEDs change color during heating
-> - **Printer event lighting** - Different colors for printing, finished, errors
-> - **G-code control** - Full manual control via M150 commands
->
-> **Supported LED Types:**
-> - **WS2812B** - Most common addressable LEDs
-> - **WS2815** - 12V addressable LEDs
-> - **SK6812** - RGBW (with white channel)
-> - **Any NEO_GRBW compatible strips**
->
-> **G-code Control Examples:**
-> ```gcode
-> M150 R255 G0 B0    ; Set LEDs to red
-> M150 R0 G255 B0    ; Set LEDs to green  
-> M150 R0 G0 B255    ; Set LEDs to blue
-> M150 R255 G255 B255 ; Set LEDs to white
-> M150 R0 G0 B0      ; Turn LEDs off
-> ```
-
-### **📍 Wiring Verification Checklist:**
-
-#### **Before Powering On:**
+### **Before Powering On:**
 - [ ] **All 8 required wires connected** (6 SPI + 2 power)
-- [ ] **Wire colors match** the pinout guide
+- [ ] **Wire colors match** the pinout guide exactly
 - [ ] **10-pin connector untouched** (top of LCD panel)
 - [ ] **Unused pins disconnected**
 - [ ] **3.3V power** (not 5V)
 - [ ] **Connections secure** and not loose
 
-#### **Power-Up Test:**
+### **Power-Up Test:**
 - [ ] **Display powers on** and shows Marlin boot screen
 - [ ] **Touch responds** to finger input
 - [ ] **No smoke or burning smell**
 - [ ] **All LEDs on SKR board** light up normally
 
-### **📍 Common Wiring Mistakes to Avoid:**
+---
 
-1. **❌ Connecting 10-pin connector** - Will damage display
-2. **❌ Using 5V instead of 3.3V** - Will damage display
-3. **❌ Connecting unused pins** - Can cause conflicts
-4. **❌ Loose connections** - Can cause intermittent issues
-5. **❌ Wrong wire colors** - Can cause confusion during troubleshooting
-6. **❌ Connecting to wrong pins** - Double-check pin numbers
+## 🚨 **Common Mistakes to Avoid**
 
-### **📍 Troubleshooting Wiring Issues:**
+| ❌ **Don't Do This** | ✅ **Do This Instead** |
+|----------------------|------------------------|
+| Connect 10-pin connector | Leave it alone - it's internal |
+| Use 5V instead of 3.3V | Use 3.3V only for display |
+| Connect unused pins | Leave them disconnected |
+| Loose connections | Secure all wires tightly |
+| Wrong wire colors | Follow color guide exactly |
+| Random pin connections | Only use specified pins |
 
-#### **Display Not Working:**
-1. **Check power connections** - Verify 3.3V and GND
-2. **Verify all 6 SPI pins** - SCK (Pin 1), CS (Pin 2), MOSI (Pin 5), MISO (Pin 6), RST (Pin 30), RS (Pin 33)
-3. **Check wire colors** - Ensure correct pin identification
-4. **Verify pin numbers** - Count carefully from pin 1
+---
 
-#### **Touch Not Responding:**
-1. **Check MOSI/MISO connections** - Touch uses these pins (Pin 5 and Pin 6)
-2. **Verify firmware settings** - TFTGLCD_PANEL_SPI enabled
-3. **Check for loose connections** - Secure all wires
+## 🔧 **Firmware Setup**
 
-#### **SD Card Issues:**
-1. **Verify SD CS connection** - Pin 3 (FCS) to PA15
-2. **Check shared SPI pins** - MOSI (Pin 5), MISO (Pin 6), SCK (Pin 1)
-3. **Ensure SD card formatted** - FAT32 format required
+### **Option 1: Use Pre-built Files (EASIEST)**
+1. **Find these files** in this folder:
+   - `Configuration_FINAL_JGAurora_A5S_SKR_Mini_E3_V2_0.h`
+   - `Configuration_adv_FINAL_JGAurora_A5S_SKR_Mini_E3_V2_0.h`
+2. **Copy them** to your Marlin folder
+3. **Build firmware** using your preferred method
 
-#### **Power Issues:**
-1. **Check voltage** - Must be 3.3V, not 5V
-2. **Verify ground connection** - Use main GND, not shield GND
-3. **Check wire gauge** - Ensure adequate current capacity
-
-### **📍 Quick Reference - Essential Pins Only:**
-
-> **⚠️ IMPORTANT: Software SPI is REQUIRED on this board**
-> - **Hardwired SPI pins (PA4, PA5, PA6, PA7) are NOT accessible**
-> - **Software SPI uses available EXP1 connector pins**
-
-**Software SPI Configuration (Required):**
-```
-Pin 1  (YELLOW)  → PB9  (SCK)   - EXP1-6
-Pin 2  (BLUE)    → PA15 (CS)    - EXP1-2  
-Pin 3  (GRAY)    → PB15 (SD CS) - EXP1-8
-Pin 5  (ORANGE)  → PB8  (MOSI)  - EXP1-7
-Pin 6  (RED)     → PB5  (MISO)  - EXP1-1
-Pin 8  (BLACK)   → GND
-Pin 10 (PURPLE)     → 3.3V
-Pin 30 (BROWN)   → PA2  (RST)
-Pin 33 (PURPLE)  → PA3  (RS)
-```
-
-**DO NOT TOUCH:**
-- **10-pin connector** on top of LCD panel
-- **Any other pins** not listed above
-
-### **📍 Success Indicators:**
-
-✅ **Display shows Marlin boot screen**
-✅ **Touch responds to finger input**  
-✅ **No error messages** on display
-✅ **All SKR board LEDs** light normally
-✅ **No smoke or burning smell**
-✅ **USB connection** works for firmware updates
-
-## 🏗️ FIRMWARE BUILD OPTIONS
-
-### **Option 1: Online Marlin Builder (RECOMMENDED)**
+### **Option 2: Online Builder (RECOMMENDED)**
 1. **Go to**: [Marlin Firmware Builder](https://marlinfw.org/tools/autobuild/)
 2. **Upload your Configuration.h** file
 3. **Select board**: "BigTreeTech SKR Mini E3 V2.0"
 4. **Build online** - gets around all local build issues
 5. **Download the .bin file**
 
-### **Option 2: Use Pre-built Configuration**
-The configuration files are already created and ready to use:
-- `Configuration_FINAL_JGAurora_A5S_SKR_Mini_E3_V2_0.h`
-- `Configuration_adv_FINAL_JGAurora_A5S_SKR_Mini_E3_V2_0.h`
-
-### **Option 3: Arduino IDE (Alternative)**
+### **Option 3: Arduino IDE (Advanced Users)**
 1. **Install Arduino IDE 1.8.x** (not 2.x)
 2. **Install STM32duino board package**
-3. **Select board**: "Generic STM32F103R series" → "Generic STM32F103RE"
+3. **Select board**: "Generic STM32F103RE"
 4. **Upload method**: "STM32CubeProgrammer (SWD)"
-5. **Open Marlin.ino** from the Marlin folder
-6. **Build and upload**
+5. **Build and upload**
 
-## 📁 CONFIGURATION FILES
+---
 
-### **Main Configuration (Configuration.h):**
-- **Motherboard**: `BOARD_BTT_SKR_MINI_E3_V2_0`
-- **Build Volume**: 310x310x330mm
-- **Display**: `TFTGLCD_PANEL_SPI`
-- **Touch**: Integrated with TFTGLCD (no separate `TOUCH_SCREEN`)
-- **USB**: Full USB support enabled
-- **Filament Sensor**: `FILAMENT_RUNOUT_SENSOR` enabled
-- **LED Support**: `NEOPIXEL_LED` enabled on PA8 pin (30 LEDs, RGBW)
-- **Z-Probe**: Ready for future use with `Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN`
-
-### **Advanced Configuration (Configuration_adv.h):**
-- **Homing**: Standard homing configuration
-- **Advanced features**: Optimized for JGAurora A5S
-- **Safety features**: Standard Marlin safety settings
-
-### **SD Auto-Detection (Built-in - ENABLED):**
-SD card auto-detection works automatically:
-1. **Hardware**: Uses built-in SD slot detect switch connected to PC4
-2. **Firmware**: Standard SD_DETECT_PIN functionality enabled
-3. **No additional wiring** - Works out of the box
-
-**Firmware configuration (standard Marlin):**
-```cpp
-// Standard SD detection - no special configuration needed
-// SD_DETECT_PIN automatically defined as PC_4 in pins file
-```
-
-### **Z-Probe Support (Ready for Future Use):**
-Z-probe functionality is configured for easy future addition:
-1. **Shared pin approach**: Uses PC_2 (Z_STOP_PIN) for both Z-min endstop and probe
-2. **No pin conflicts**: All pins available for probe functionality
-3. **Easy activation**: Uncomment `#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN` in Configuration.h
-4. **Hardware connection**: Connect probe to Z-STOP connector (PC_2)
-
-**Future Z-probe activation:**
-```cpp
-// In Configuration.h, uncomment this line when adding Z-probe:
-#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN  // Enable shared pin mode
-```
-
-## 🔧 FLASHING INSTRUCTIONS
+## 📱 **Flashing Instructions**
 
 ### **Method 1: USB (Recommended)**
 1. **Connect USB cable** to SKR Mini E3 V2.0
@@ -458,54 +229,84 @@ Z-probe functionality is configured for easy future addition:
 4. **Power on board**
 5. **Wait for upload to complete**
 
-## ✅ VERIFICATION STEPS
+---
 
-After flashing:
+## ✅ **Testing & Verification**
+
+### **After Flashing:**
 1. **Check display** - Should show Marlin boot screen
-2. **Test touch** - Touch should respond
+2. **Test touch** - Touch should respond to finger input
 3. **Check dimensions** - X/Y/Z should show correct values
 4. **Test movement** - All axes should move correctly
 5. **Check temperature** - Hotend and bed should read correctly
-6. **Test LED strips** - Send `M150 R255 G0 B0` to test red LEDs
 
-## 🚨 TROUBLESHOOTING
+### **Test NeoPixel LEDs:**
+Send this G-code to test red LEDs:
+```gcode
+M150 R255 G0 B0
+```
+
+---
+
+## 🚨 **Troubleshooting**
 
 ### **Display Not Working:**
-- Check all SPI connections
-- Verify 3.3V power supply
-- Check CS pin connection
+1. **Check power connections** - Verify 3.3V and GND
+2. **Verify all 6 SPI pins** - SCK, CS, MOSI, MISO, RST, RS
+3. **Check wire colors** - Ensure correct pin identification
+4. **Verify pin numbers** - Count carefully from pin 1
 
 ### **Touch Not Responding:**
-- Verify touch CS and IRQ pins
-- Check touch calibration
-- Ensure touch library is enabled
+1. **Check MOSI/MISO connections** - Touch uses these pins
+2. **Verify firmware settings** - TFTGLCD_PANEL_SPI enabled
+3. **Check for loose connections** - Secure all wires
 
-### **LED Strips Not Working:**
-- Check PA8 data connection
-- Verify 5V power supply (external PSU for >10 LEDs)
-- Ensure correct LED type in configuration
-- Test with simple G-code: `M150 R255 G0 B0`
+### **SD Card Issues:**
+1. **Verify SD CS connection** - Pin 3 (FCS) to PB15
+2. **Check shared SPI pins** - MOSI, MISO, SCK
+3. **Ensure SD card formatted** - FAT32 format required
 
-### **Build Issues:**
-- Use online Marlin builder
-- Check board selection
-- Verify configuration file syntax
+### **Power Issues:**
+1. **Check voltage** - Must be 3.3V, not 5V
+2. **Verify ground connection** - Use main GND
+3. **Check wire gauge** - Ensure adequate current capacity
 
-## 📞 SUPPORT
+---
 
-If you encounter issues:
-1. **Check wiring** - Most issues are connection-related
-2. **Verify configuration** - Ensure all settings are correct
-3. **Use online builder** - Gets around local build issues
-4. **Check Marlin forums** - Community support available
+## 🎯 **Success Checklist**
 
-## 🎯 NEXT STEPS
+- [ ] **Display shows Marlin boot screen**
+- [ ] **Touch responds to finger input**  
+- [ ] **No error messages** on display
+- [ ] **All SKR board LEDs** light normally
+- [ ] **No smoke or burning smell**
+- [ ] **USB connection** works for firmware updates
+- [ ] **All axes move** correctly
+- [ ] **Temperature sensors** read correctly
 
-1. **Connect hardware** using wiring diagram
+---
+
+## 🚀 **Next Steps**
+
+1. **Connect hardware** using wiring diagram above
 2. **Choose firmware method** (online builder recommended)
 3. **Flash firmware** to SKR Mini E3 V2.0
 4. **Test functionality** and calibrate
 5. **Enjoy your upgraded JGAurora A5S!**
+
+---
+
+## 📞 **Need Help?**
+
+**Most issues are wiring-related:**
+1. **Double-check all connections** - Use the verification checklist
+2. **Verify wire colors** - Follow the color guide exactly
+3. **Check pin numbers** - Count carefully from pin 1
+4. **Use online builder** - Gets around local build issues
+
+**Community Support:**
+- [Marlin Forums](https://forums.marlinfw.org/)
+- [BigTreeTech Discord](https://discord.gg/biqu3d)
 
 ---
 
@@ -514,91 +315,4 @@ If you encounter issues:
 **Hardware**: Fully compatible  
 **Features**: All JGAurora A5S features preserved + touchscreen support
 
-**Visual Guide:**
-```
-TFT Connector (5 pins):
-  -----
-  | 1 | RST
-  | 2 | PA3 RX2 ← PA3 is HERE (Pin 2)
-  | 3 | PA2 TX2
-  | 4 | GND
-  | 5 | 5V
-  -----
-```
-
-**⚠️ IMPORTANT: TFT Connector Only Has 5 Pins!**
-
-The TFT connector only provides:
-- **PA2** (Reset)
-- **PA3** (Data/Command) ← **Your target pin**
-- **GND** and **5V** (Power)
-
-**PA4, PA5, PA6, PA7 are NOT accessible here** - they're hardwired elsewhere on the board.
-
-**This is why our configuration uses Software SPI with EXP1 connector pins instead of Hardware SPI!**
-
-### **📍 Pin Index (Quick Lookup):**
-
-**A-Pins (Port A):**
-- **PA0**: Temperature sensor (Hotend) - Bottom area
-- **PA1**: Servo connector - Right side
-- **PA2**: TFT Reset - TFT Connector Pin 1
-- **PA3**: TFT Data/Command - TFT Connector Pin 2 ← **YOUR TARGET**
-
-- **PA8**: NeoPixel LED - Right side
-- **PA9**: Button 1 - EXP1 Connector Pin 3
-- **PA10**: Button 2 - EXP1 Connector Pin 4
-- **PA13**: SWD Debug - Right side (disabled)
-- **PA14**: USB Connect - Right side (disabled)
-- **PA15**: Button Encoder - EXP1 Connector Pin 2
-
-**B-Pins (Port B):**
-- **PB0**: Z Motor Step - Bottom area
-- **PB1**: Z Motor Enable - Bottom area
-- **PB2**: Y Motor Direction - Bottom area
-- **PB3**: E0 Motor Step - Bottom area
-- **PB4**: E0 Motor Direction - Bottom area
-- **PB5**: Beeper - EXP1 Connector Pin 1
-- **PB6**: I2C SCL (EEPROM) - Right side
-- **PB7**: I2C SDA (EEPROM) - Right side
-- **PB8**: LCD RS - EXP1 Connector Pin 7
-- **PB9**: LCD D4 - EXP1 Connector Pin 6
-- **PB10**: Y Motor Step - Bottom area
-- **PB11**: Y Motor Enable - Bottom area
-- **PB12**: X Motor Direction - Bottom area
-- **PB13**: X Motor Step - Bottom area
-- **PB14**: X Motor Enable - Bottom area
-- **PB15**: LCD EN - EXP1 Connector Pin 8
-
-**C-Pins (Port C):**
-- **PC0**: X Limit Switch - Bottom area
-- **PC1**: Y Limit Switch - Bottom area
-- **PC2**: Z Limit Switch - Bottom area
-- **PC3**: Bed Temperature - Bottom area
-- **PC4**: SD Card Detect - Right side
-- **PC5**: Z Motor Direction - Bottom area
-- **PC6**: Fan 0 - Right side
-- **PC7**: Fan 1 - Right side
-- **PC8**: Hotend Heater - Right side
-- **PC9**: Bed Heater - Right side
-- **PC10**: TMC UART - Right side
-- **PC11**: TMC UART - Right side
-- **PC12**: Power Loss Detection - Right side
-- **PC13**: Power Supply Control - Right side
-- **PC14**: Z Probe - Right side
-- **PC15**: Filament Runout - Right side
-
-**D-Pins (Port D):**
-- **PD2**: E0 Motor Enable - Bottom area
-
-**Power Pins:**
-- **3.3V**: Multiple locations - Right side power headers
-- **5V**: Multiple locations - Right side power headers
-- **24V**: Main power input - Right side
-- **GND**: Multiple locations - Throughout board
-
-**Special Pins:**
-- **USB_DM**: PA11 (hardwired)
-- **USB_DP**: PA12 (hardwired)
-- **RESET**: Reset button (top)
-- **BOOT0**: Boot button (top)
+**🎉 You're ready to upgrade your JGAurora A5S!**
