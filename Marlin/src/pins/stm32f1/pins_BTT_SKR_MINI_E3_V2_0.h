@@ -42,7 +42,9 @@
 //
 // USB connect control
 //
-#define USB_CONNECT_PIN                     PA_14
+// DISABLED: PA_14 USB connect control prevents USB enumeration
+// Let USB enumerate normally without software control
+//#define USB_CONNECT_PIN                     PA_14
 
 /**
  *            SKR Mini E3 V2.0
