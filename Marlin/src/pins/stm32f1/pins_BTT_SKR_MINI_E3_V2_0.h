@@ -146,6 +146,9 @@
   // Force Software SPI to use available pins
   #define FORCE_SOFT_SPI
   
+  // Override default TFTGLCD_CS to prevent pin conflicts
+  #undef TFTGLCD_CS
+  
   // Custom SPI pin assignments using available pins
   #define TFTGLCD_SCK_PIN                   PB_9   // EXP1-6 (Clock)
   #define TFTGLCD_MOSI_PIN                  PB_8   // EXP1-7 (Data In)
