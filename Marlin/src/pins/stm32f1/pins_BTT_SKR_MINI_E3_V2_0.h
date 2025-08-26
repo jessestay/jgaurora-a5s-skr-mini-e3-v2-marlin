@@ -51,7 +51,7 @@
  *                 ------
  * (BEEPER)  PB5  | 1  2 | PA15 (BTN_ENC)
  * (BTN_EN1) PC_14| 3  4 | RESET  // MOVED from PA9 to free up USB pin
- * (BTN_EN2) PC_15| 5  6 | PB9  (LCD_D4)  // MOVED from PA10 to free up USB pin
+ * (BTN_EN2) PC_12| 5  6 | PB9  (LCD_D4)  // MOVED from PA10 to free up USB pin (PC12 = power loss pin, unused)
  * (LCD_RS)  PB8  | 7  8 | PB15 (LCD_EN)
  *            GND | 9 10 | 5V
  *                 ------
@@ -61,7 +61,7 @@
 #define EXP1_02_PIN                         PA_15
 #define EXP1_03_PIN                         PC_14  // MOVED from PA9 to free up USB pin
 #define EXP1_04_PIN                         -1    // RESET
-#define EXP1_05_PIN                         PC_15  // MOVED from PA10 to free up USB pin
+#define EXP1_05_PIN                         PC_12  // MOVED from PA10 to free up USB pin (PC12 = power loss pin, unused)
 #define EXP1_06_PIN                         PB_9
 #define EXP1_07_PIN                         PB_8
 #define EXP1_08_PIN                         PB_15
@@ -120,7 +120,7 @@
 // Changing these will not change the pin they are on.
 
 // Hardware UART pins
-// UART1 pins freed up for USB functionality (button inputs moved to PC14/PC15)
+// UART1 pins freed up for USB functionality (button inputs moved to PC14/PC12)
 // #define UART1_TX_PIN                        PA_9   // default usage LCD connector
 // #define UART1_RX_PIN                        PA_10  // default usage LCD connector
 #define UART2_TX_PIN                        PA_2   // default usage TFT connector
