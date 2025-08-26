@@ -139,27 +139,27 @@
 //
 
 //
-// Custom Software SPI Configuration for TFTGLCD_PANEL_SPI
-// Uses available pins instead of hardwired SPI pins
+// Custom Hardware SPI Configuration for TFTGLCD_PANEL_SPI
+// Uses available pins mapped to hardware SPI peripheral
 //
 #if ENABLED(TFTGLCD_PANEL_SPI)
-  // Force Software SPI to use available pins
-  #define FORCE_SOFT_SPI
+  // Use Hardware SPI but map to available pins
+  // STM32F103RE has multiple SPI peripherals - we'll use SPI2 on PB13/PB14/PB15
   
   // Override default TFTGLCD_CS to prevent pin conflicts
   #undef TFTGLCD_CS
   
-  // Custom SPI pin assignments using available pins
-  #define TFTGLCD_SCK_PIN                   PB_9   // EXP1-6 (Clock)
-  #define TFTGLCD_MOSI_PIN                  PB_8   // EXP1-7 (Data In)
-  #define TFTGLCD_MISO_PIN                  PB_5   // EXP1-1 (Data Out)
+  // Map TFTGLCD pins to available hardware SPI pins
+  #define TFTGLCD_SCK_PIN                   PB_13  // SPI2_SCK (Hardware SPI)
+  #define TFTGLCD_MOSI_PIN                  PB_15  // SPI2_MOSI (Hardware SPI)
+  #define TFTGLCD_MISO_PIN                  PB_14  // SPI2_MISO (Hardware SPI)
   #define TFTGLCD_CS_PIN                    PA_15  // EXP1-2 (Display Chip Select)
   
   // Create alias for existing TFTGLCD code
   #define TFTGLCD_CS                        TFTGLCD_CS_PIN
   
   // SD Card CS pin (separate from display CS)
-  #define TFTGLCD_SD_CS_PIN                 PB_15  // EXP1-8 (SD Card Chip Select)
+  #define TFTGLCD_SD_CS_PIN                 PB_12  // SPI2_NSS (Hardware SPI)
   
   // Display control pins (already connected)
   #define TFTGLCD_DC_PIN                    PA_3   // TFT TX2 (Data/Command)
