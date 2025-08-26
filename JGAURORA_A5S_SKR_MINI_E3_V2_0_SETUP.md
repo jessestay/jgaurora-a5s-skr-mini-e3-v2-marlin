@@ -35,11 +35,7 @@ Since the hardwired SPI pins (PA4, PA5, PA6, PA7) are not accessible on the TFT 
 
 **TFT Connector (Top-Left Area):**
 - **PA2 (RST)**: Reset pin - near TFT connector
-- **PA3 (DC)**: Data/Command pin - near TFT connector  
-- **PA4 (CS)**: Display Chip Select - near TFT connector
-- **PA5 (SCK)**: Clock signal - near TFT connector
-- **PA6 (MISO)**: Data Out - near TFT connector
-- **PA7 (MOSI)**: Data In - near TFT connector
+- **PA3 (DC)**: Data/Command pin - near TFT connector
 
 **Power Pins:**
 - **3.3V**: Available on TFT connector and power headers
@@ -81,9 +77,9 @@ Since the hardwired SPI pins (PA4, PA5, PA6, PA7) are not accessible on the TFT 
 | **Pin 1 (SCK)** | **PB9 (EXP1-6)** | SPI Clock | **YELLOW** | ✅ Available |
 | **Pin 2 (TCS)** | **PA15 (EXP1-2)** | Display CS | **BLUE** | ✅ Available |
 | **Pin 5 (MOSI)** | **PB8 (EXP1-7)** | Data In | **ORANGE** | ✅ Available |
-| **Pin 6 (MISO)** | **PB5 (EXP1-1)** | Data Out | **PURPLE** | ✅ Available |
+| **Pin 6 (MISO)** | **PB5 (EXP1-1)** | Data Out | **RED** | ✅ Available |
 | **Pin 8 (GND)** | **GND** | Ground | **BLACK** | ✅ Connected |
-| **Pin 10 (VCC)** | **3.3V** | Power | **RED** | ✅ Connected |
+| **Pin 10 (VCC)** | **3.3V** | Power | **PURPLE** | ✅ Connected |
 | **Pin 30 (RST)** | **PA2** | Reset | **BROWN** | ✅ Connected |
 | **Pin 33 (RS)** | **PA3** | Data/Command | **PURPLE** | ✅ Connected |
 
@@ -108,16 +104,16 @@ Pin Layout (Looking at the connector):
 │ 2  4  6  8  10 12 14 16 18 20 22 24 26 28 30 32 34 │
 └─────────────────────────────────────────────────┘
 
-Pin 1  (SCK)     → PA5  (SPI1_SCK)     ← YELLOW wire
-Pin 2  (TCS)     → PA4  (Display CS)    ← BLUE wire  
-Pin 3  (FCS)     → PA15 (SD Card CS)    ← GRAY wire (OPTIONAL)
-Pin 4  (TINT)    → NC   (Not Connected) ← RED wire
-Pin 5  (MOSI)    → PA7  (SPI1_MOSI)    ← ORANGE wire
-Pin 6  (MISO)    → PA6  (SPI1_MISO)    ← PURPLE wire
+Pin 1  (SCK)     → PB9  (EXP1-6)       ← YELLOW wire
+Pin 2  (TCS)     → PA15 (EXP1-2)       ← BLUE wire  
+Pin 3  (FCS)     → PB15 (SD Card CS)   ← GRAY wire (OPTIONAL)
+Pin 4  (TINT)    → NC   (Not Connected) 
+Pin 5  (MOSI)    → PB8  (EXP1-7)       ← ORANGE wire
+Pin 6  (MISO)    → PB5  (EXP1-1)       ← RED wire
 Pin 7  (NC)      → NC   (Not Connected)
 Pin 8  (GND)     → GND  (Ground)        ← BLACK wire
 Pin 9  (GND)     → GND  (Ground)        ← BROWN wire
-Pin 10 (VCC)     → 3.3V (3.3V Power)   ← RED wire
+Pin 10 (VCC)     → 3.3V (3.3V Power)   ← PURPLE wire
 Pin 11 (VCC)     → 3.3V (3.3V Power)   ← (Not Connected)
 Pin 12 (BLEN)    → NC   (Not Connected)
 Pin 13 (SDCS)    → NC   (Not Connected)
@@ -139,12 +135,12 @@ Pin 34 (CS)      → NC   (Not Connected)
 #### **Required Connections (Display + Power):**
 | JGAurora A5S Pin | SKR Mini E3 V2.0 Pin | Function | Wire Color | Status |
 |------------------|----------------------|----------|------------|---------|
-| **Pin 1 (SCK)** | **PA5** | SPI Clock | **YELLOW** | ✅ Required |
-| **Pin 2 (TCS)** | **PA4** | Display CS | **BLUE** | ✅ Required |
-| **Pin 5 (MOSI)** | **PA7** | Data In | **ORANGE** | ✅ Required |
-| **Pin 6 (MISO)** | **PA6** | Data Out | **RED** | ✅ Required |
+| **Pin 1 (SCK)** | **PB9 (EXP1-6)** | SPI Clock | **YELLOW** | ✅ Required |
+| **Pin 2 (TCS)** | **PA15 (EXP1-2)** | Display CS | **BLUE** | ✅ Required |
+| **Pin 5 (MOSI)** | **PB8 (EXP1-7)** | Data In | **ORANGE** | ✅ Required |
+| **Pin 6 (MISO)** | **PB5 (EXP1-1)** | Data Out | **RED** | ✅ Required |
 | **Pin 8 (GND)** | **GND** | Ground | **BLACK** | ✅ Required |
-| **Pin 10 (VCC)** | **3.3V** | Power | **RED** | ✅ Required |
+| **Pin 10 (VCC)** | **3.3V** | Power | **PURPLE** | ✅ Required |
 | **Pin 30 (RST)** | **PA2** | Reset | **BROWN** | ✅ Required |
 | **Pin 33 (RS)** | **PA3** | Data/Command | **PURPLE** | ✅ Required |
 
@@ -173,7 +169,7 @@ Pin 34 (CS)      → NC   (Not Connected)
 - **ORANGE**: MOSI (Data In) - Pin 5
 - **RED**: MISO (Data Out) - Pin 6
 - **BLACK**: Ground - Pin 8
-- **RED**: 3.3V Power - Pin 10
+- **PURPLE**: 3.3V Power - Pin 10
 - **BROWN**: Reset - Pin 30
 - **PURPLE**: Data/Command - Pin 33
 
@@ -189,13 +185,13 @@ Pin 34 (CS)      → NC   (Not Connected)
 
 #### **Step 2: Connect Power First**
 1. **Pin 8 (GND)** → **GND** on SKR Mini E3 V2.0 (BLACK wire)
-2. **Pin 10 (VCC)** → **3.3V** on SKR Mini E3 V2.0 (RED wire)
+2. **Pin 10 (VCC)** → **3.3V** on SKR Mini E3 V2.0 (PURPLE wire)
 
 #### **Step 3: Connect Display SPI Pins**
-1. **Pin 1 (SCK)** → **PA5** (YELLOW wire)
-2. **Pin 2 (TCS)** → **PA15** (BLUE wire)
-3. **Pin 5 (MOSI)** → **PB8** (ORANGE wire)
-4. **Pin 6 (MISO)** → **PB5** (RED wire)
+1. **Pin 1 (SCK)** → **PB9 (EXP1-6)** (YELLOW wire)
+2. **Pin 2 (TCS)** → **PA15 (EXP1-2)** (BLUE wire)
+3. **Pin 5 (MOSI)** → **PB8 (EXP1-7)** (ORANGE wire)
+4. **Pin 6 (MISO)** → **PB5 (EXP1-1)** (RED wire)
 5. **Pin 30 (RST)** → **PA2** (BROWN wire)
 6. **Pin 33 (RS)** → **PA3** (PURPLE wire)
 
@@ -230,17 +226,9 @@ Pin 34 (CS)      → NC   (Not Connected)
 > - **TFTGLCD_PANEL_SPI protocol** - Touch commands sent through main display interface
 > - **Z-Probe and SD detection pins available** - No pin conflicts with touch functionality
 > - **Simplified wiring** - Only display SPI connection required for full touch support
-> - **Works with both configurations**: Hardware SPI (PA5/PA6/PA7) or Software SPI (PB9/PB8/PB5)
+> - **Works with Software SPI configuration**: Uses EXP1 connector pins (PB9/PB8/PB5)
 
 ### **📍 SD Card (Optional):**
-
-**Hardware SPI Configuration:**
-| JGAurora A5S SD | SKR Mini E3 V2.0 Pin | Function |
-|----------------|----------------------|----------|
-| **SD MOSI** | **PA7** | Shared with display |
-| **SD MISO** | **PA6** | Shared with display |
-| **SD SCK** | **PA5** | Shared with display |
-| **SD CS** | **PA15** | Available GPIO |
 
 **Software SPI Configuration:**
 | JGAurora A5S SD | SKR Mini E3 V2.0 Pin | Function |
@@ -252,7 +240,7 @@ Pin 34 (CS)      → NC   (Not Connected)
 
 > **✅ SD Card Sharing:**
 > - **SPI bus shared** between display and SD card
-> - **Separate CS pins** - Display uses PA4, SD uses PA15
+> - **Separate CS pins** - Display uses PA15 (EXP1-2), SD uses PB15 (EXP1-8)
 > - **No conflicts** - Firmware switches between devices
 > - **Efficient design** - Saves pins while maintaining functionality
 
@@ -556,10 +544,7 @@ The TFT connector only provides:
 - **PA1**: Servo connector - Right side
 - **PA2**: TFT Reset - TFT Connector Pin 1
 - **PA3**: TFT Data/Command - TFT Connector Pin 2 ← **YOUR TARGET**
-- **PA4**: TFT Chip Select - **NOT ACCESSIBLE** (hardwired elsewhere)
-- **PA5**: TFT Clock - **NOT ACCESSIBLE** (hardwired elsewhere)
-- **PA6**: TFT MISO - **NOT ACCESSIBLE** (hardwired elsewhere)
-- **PA7**: TFT MOSI - **NOT ACCESSIBLE** (hardwired elsewhere)
+
 - **PA8**: NeoPixel LED - Right side
 - **PA9**: Button 1 - EXP1 Connector Pin 3
 - **PA10**: Button 2 - EXP1 Connector Pin 4
